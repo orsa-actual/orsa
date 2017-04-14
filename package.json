@@ -4,8 +4,12 @@
   "description": "Code DOM",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-setup": "lerna bootstrap"
   },
   "author": "Jack Herrington <jherr@pobox.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^2.0.0-rc.1"
+  }
 }

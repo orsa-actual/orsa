@@ -1,0 +1,13 @@
+{
+  "files": [
+    "src/**/*.js",
+    "index.js",
+    "fixtures/**/*"
+  ],
+  "tests": [
+    "test/**/*.js"
+  ],
+  "env": {
+    "type": "node"
+  }
+}

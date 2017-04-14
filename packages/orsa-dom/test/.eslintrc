@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "no-unused-expressions": 0,
+    "import/no-extraneous-dependencies": 0
+  },
+  "globals": {
+    "describe": true,
+    "it": true
+  }
+}
