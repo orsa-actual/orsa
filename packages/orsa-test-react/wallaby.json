@@ -2,7 +2,10 @@
   "files": [
     "src/**/*.js",
     "index.js",
-    "fixtures/**/*"
+    "fixtures/*/*.js",
+    "fixtures/*/src/*.js",
+    "fixtures/*/*.json",
+    "fixtures/*/*.java"
   ],
   "tests": [
     "test/**/*.js"

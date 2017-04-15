@@ -4,12 +4,22 @@
   "description": "Code DOM",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-setup": "lerna bootstrap"
+    "test": "make test && make lint",
+    "lint": "make lint",
+    "dev-setup": "make bootstrap"
   },
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
   "devDependencies": {
     "lerna": "^2.0.0-rc.1"
+  },
+  "dependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0"
   }
 }

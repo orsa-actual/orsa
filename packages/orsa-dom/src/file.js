@@ -2,13 +2,14 @@ const Element = require('./element');
 const Constants = require('./constants');
 
 class File extends Element {
-  constructor(orsa, metadata) {
-    super(orsa, metadata);
+  constructor(parent, metadata) {
+    super(parent, metadata);
     this.type = File.TYPE;
     this.setPersistedAttributes([
       'localPath',
       'relativePath',
       'name',
+      'mimeType',
     ]);
   }
 

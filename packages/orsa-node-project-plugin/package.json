@@ -10,6 +10,8 @@
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
   "dependencies": {
+    "babylon": "^6.16.1",
+    "glob": "^7.1.1",
     "lodash.assign": "^4.2.0",
     "orsa-dom": "^0.0.3",
     "orsa-listeners": "^0.0.3"

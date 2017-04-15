@@ -12,6 +12,7 @@
   "dependencies": {
     "lodash.includes": "^4.3.0",
     "orsa-core": "^0.0.3",
+    "orsa-dom": "^0.0.3",
     "orsa-node-project-plugin": "^0.0.3",
     "orsa-project-fs-scanner-plugin": "^0.0.3"
   },

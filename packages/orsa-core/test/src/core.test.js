@@ -21,7 +21,7 @@ class BadPlugin {
 }
 BadPlugin.version = 1;
 
-describe('orsa-core index', () => {
+describe('orsa-core main', () => {
   it('should have a version', () => {
     expect(OrsaCore.version).to.equal('0.0.3');
   });
@@ -136,7 +136,11 @@ describe('orsa-core index', () => {
   });
 
   it('should run with an error', (done) => {
-    const oc = new OrsaCore();
+    const oc = new OrsaCore({}, {
+      console: {
+        log: () => {},
+      },
+    });
     oc.plugins.add(BadPlugin);
     const names = [];
     oc.on(OrsaCore.PHASE_START, (obj, name) => {

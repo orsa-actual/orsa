@@ -3,12 +3,13 @@ const Element = require('./element');
 const Constants = require('./constants');
 
 class Project extends Element {
-  constructor(orsa, metadata) {
-    super(orsa, metadata);
+  constructor(parent, metadata) {
+    super(parent, metadata);
     this.type = Project.TYPE;
     this.setPersistedAttributes([
       'name',
       'localPath',
+      'version',
     ]);
   }
 

@@ -3,7 +3,18 @@ const expect = require('chai').expect;
 const Orsa = require('orsa-core');
 const path = require('path');
 const includes = require('lodash.includes');
+const {
+  Project,
+  File,
+} = require('orsa-dom');
 
+/*
+Wallaby copies source files and their instrumented versions into
+temp directories. These tests uses files located in the fixtures directories.
+So in order to access them we need to get Wallaby to copy them first by
+hacking 'wallaby.json'. Then do a little path munging to get to them. But
+only if we are running in Wallaby. We don't want to mess up `npm t`, right?
+*/
 const fixWallabyPaths = (p) => {
   let newPath = p;
   /* istanbul ignore next */
@@ -107,7 +118,6 @@ describe('orsa tester', () => {
     });
   });
 
-
   it('test1 should be seen as node projects', (done) => {
     const dirName = fixWallabyPaths(__dirname);
     const oc = new Orsa({
@@ -123,6 +133,31 @@ describe('orsa tester', () => {
       expect(oc.children.find({
         name: 'project1',
       })[0].metadata.get('projectType')).to.eql('node');
+      done();
+    });
+  });
+
+  it('test1 should have projects and files', (done) => {
+    const dirName = fixWallabyPaths(__dirname);
+    const oc = new Orsa({
+      plugins: [
+        require('orsa-project-fs-scanner-plugin'),
+        require('orsa-node-project-plugin'),
+      ],
+      'orsa-project-fs-scanner-plugin': {
+        path: path.resolve(dirName, '../../fixtures/test1'),
+      },
+    });
+    oc.run(() => {
+      const project1 = oc.children.find({
+        type: Project.TYPE,
+        name: 'project1',
+      })[0];
+      const indexFile = project1.children.find({
+        type: File.TYPE,
+        name: 'index.js',
+      })[0];
+      expect(indexFile).to.not.be.null;
       done();
     });
   });

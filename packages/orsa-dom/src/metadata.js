@@ -59,7 +59,7 @@ class MetaData extends Base {
   }
 
   get withoutTemporary() {
-    return pickBy(this.metadata, v => !v.options.temporary);
+    return pickBy(this.metadata, v => !(v.options && v.options.temporary));
   }
 
   save() {
