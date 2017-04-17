@@ -21,6 +21,12 @@ class OrsaBase extends EventEmitter {
     this.persistedAttributes = {};
   }
 
+  toObject() {
+    return merge(this.persistedAttributes, {
+      type: this.type,
+    });
+  }
+
   setPersistedAttributes(attrs) {
     attrs.forEach((attribute) => {
       this.persistedAttributes[attribute] = undefined;

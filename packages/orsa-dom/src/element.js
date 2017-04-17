@@ -62,6 +62,13 @@ class Element extends Base {
       this.children.add(this.top.restoreNode(this, c));
     });
   }
+
+  toObject() {
+    return merge(super.toObject(), {
+      metadata: this.metadata.toObject(),
+      children: this.children.toArray().map(c => c.toObject()),
+    });
+  }
 }
 
 module.exports = Element;

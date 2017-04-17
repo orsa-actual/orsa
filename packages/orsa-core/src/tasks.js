@@ -1,8 +1,24 @@
 const EventEmitter = require('events');
 
+class OrsaTask {
+  constructor(id, task) {
+    this.id = id;
+    this.task = task;
+    this.hasRun = false;
+  }
+
+  run() {
+    if (this.hasRun === false) {
+      this.hasRun = true;
+      this.task();
+    }
+  }
+}
+
 class OrsaTasks extends EventEmitter {
   constructor() {
     super();
+
     this.tasks = [];
     this.nextTaskId = 1;
     this.started = false;
@@ -15,7 +31,7 @@ class OrsaTasks extends EventEmitter {
   start() {
     this.started = true;
     this.emit(OrsaTasks.STARTED);
-    this.tasks.forEach(t => t.task());
+    this.tasks.forEach(t => t.run());
     this.checkForDone();
   }
 
@@ -27,21 +43,18 @@ class OrsaTasks extends EventEmitter {
 
   add(name, task) {
     const tid = this.nextTaskId;
-    const taskInfo = {
-      id: tid,
-      task: () => {
-        task(() => {
-          this.remove(tid);
-          this.checkForDone();
-        });
-      },
-    };
-    this.tasks.push(taskInfo);
-    this.emit(OrsaTasks.CREATE, taskInfo);
+    const taskObj = new OrsaTask(tid, () => {
+      task(() => {
+        this.remove(tid);
+        this.checkForDone();
+      });
+    });
+    this.tasks.push(taskObj);
+    this.emit(OrsaTasks.CREATE, taskObj);
     this.nextTaskId += 1;
 
     if (this.started) {
-      taskInfo.task();
+      taskObj.run();
     }
 
     return tid;
@@ -62,5 +75,7 @@ OrsaTasks.CREATE = 'OrsaTasks.CREATE';
 OrsaTasks.DELETE = 'OrsaTasks.DELETE';
 OrsaTasks.STARTED = 'OrsaTasks.STARTED';
 OrsaTasks.FINISHED = 'OrsaTasks.FINISHED';
+
+OrsaTasks.OrsaTask = OrsaTask;
 
 module.exports = OrsaTasks;

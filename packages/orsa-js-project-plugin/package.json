@@ -1,0 +1,31 @@
+{
+  "name": "orsa-js-project-plugin",
+  "version": "0.0.3",
+  "description": "Orsa plugin to support javascript projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",
+    "lint": "eslint index.js src/**/*.js test/**/*.js"
+  },
+  "author": "Jack Herrington <jherr@pobox.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babylon": "^6.16.1",
+    "glob": "^7.1.1",
+    "lodash.assign": "^4.2.0",
+    "orsa-dom": "^0.0.3",
+    "orsa-ast-parser": "^0.0.3",
+    "orsa-listeners": "^0.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
+  }
+}

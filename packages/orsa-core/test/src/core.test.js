@@ -47,9 +47,6 @@ describe('orsa-core main', () => {
       require: () => {
         throw new Error('wow, bad plugin!');
       },
-      console: {
-        log: () => {},
-      },
     });
     oc.run((err) => {
       expect(err).to.eql('Error: wow, bad plugin!');
@@ -137,9 +134,6 @@ describe('orsa-core main', () => {
 
   it('should run with an error', (done) => {
     const oc = new OrsaCore({}, {
-      console: {
-        log: () => {},
-      },
     });
     oc.plugins.add(BadPlugin);
     const names = [];
@@ -158,27 +152,31 @@ describe('orsa-core main', () => {
   });
 
   it('should log warnings, etc.', () => {
-    let expected = '';
-
     const oc = new OrsaCore({
       fooz: 'baz',
-    }, {
-      console: {
-        log: (t1, t2) => {
-          expect(t1 === expected).to.be.true;
-          expect(t2).to.eql('foo');
-        },
-      },
     });
 
-    expected = 'info';
-    oc.logManager.info('foo');
+    let expected = 0;
+    oc.on('orsa.log.info', (orsa, t) => {
+      expect(orsa).to.not.be.null;
+      expect(t).to.eql('foo-info');
+      expected += 1;
+    });
+    oc.on('orsa.log.warn', (orsa, t) => {
+      expect(orsa).to.not.be.null;
+      expect(t).to.eql('foo-warn');
+      expected += 1;
+    });
+    oc.on('orsa.log.error', (orsa, t) => {
+      expect(orsa).to.not.be.null;
+      expect(t).to.eql('foo-error');
+      expected += 1;
+    });
 
-    expected = 'warning';
-    oc.logManager.warning('foo');
-
-    expected = 'error';
-    oc.logManager.error('foo');
+    oc.logManager.info('foo-info');
+    oc.logManager.warning('foo-warn');
+    oc.logManager.error('foo-error');
+    expect(expected).to.eql(3);
   });
 
   it('should have children', () => {

@@ -123,7 +123,7 @@ describe('orsa tester', () => {
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
-        require('orsa-node-project-plugin'),
+        require('orsa-js-project-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
         path: path.resolve(dirName, '../../fixtures/test1'),
@@ -142,7 +142,8 @@ describe('orsa tester', () => {
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
-        require('orsa-node-project-plugin'),
+        require('orsa-js-project-plugin'),
+        require('orsa-js-language-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
         path: path.resolve(dirName, '../../fixtures/test1'),

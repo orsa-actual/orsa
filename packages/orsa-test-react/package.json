@@ -5,18 +5,24 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",
-    "lint": "eslint index.js src/**/*.js test/**/*.js"
+    "lint": "eslint index.js src/**/*.js test/**/*.js",
+    "orsa": "orsa --output ./fixtures/test1.json --path ./fixtures/test1 | bunyan -o short"
   },
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
   "dependencies": {
     "lodash.includes": "^4.3.0",
+    "orsa-cli": "^0.0.3",
     "orsa-core": "^0.0.3",
     "orsa-dom": "^0.0.3",
-    "orsa-node-project-plugin": "^0.0.3",
+    "orsa-js-build-plugin": "^0.0.3",
+    "orsa-js-dependency-plugin": "^0.0.3",
+    "orsa-js-language-plugin": "^0.0.3",
+    "orsa-js-project-plugin": "^0.0.3",
     "orsa-project-fs-scanner-plugin": "^0.0.3"
   },
   "devDependencies": {
+    "bunyan": "^1.8.10",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",

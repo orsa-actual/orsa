@@ -16,7 +16,6 @@ class OrsaCore extends RootElement {
     this.plugins = new OrsaPlugins(this);
     this.config = config;
     this.options = assign({
-      console,
       require,
     }, options);
 
@@ -24,17 +23,16 @@ class OrsaCore extends RootElement {
 
     this.runError = null;
 
-    /* eslint no-console: 0 */
     this.logManager = {
       warning: (text) => {
-        this.options.console.log('warning', text);
+        this.emit('orsa.log.warn', text);
       },
       error: (text) => {
         this.runError = text;
-        this.options.console.log('error', text);
+        this.emit('orsa.log.error', text);
       },
       info: (text) => {
-        this.options.console.log('info', text);
+        this.emit('orsa.log.info', text);
       },
     };
 
