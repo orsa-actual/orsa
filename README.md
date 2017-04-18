@@ -1,4 +1,4 @@
-<img src="/assets/logo.png" style="float: right; margin-left: 20; margin-bottom: 20; max-width: 30%;" />
+<img src="/assets/logo.png" align="right" style="margin-left: 20; margin-bottom: 20; max-width: 250px;" />
 
 # Orsa
 

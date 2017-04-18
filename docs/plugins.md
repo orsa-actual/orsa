@@ -2,7 +2,13 @@
 
 Plugins are the critical element to Orsa. Without plugins Orsa is a literal no-op. Orsa manages three things, the DOM, the plugins and a task manager that monitors the tasks that plugins create. Plugins do all the work in Orsa.
 
-A plugin is just a class. This is a plugin:
+# The Easiest Route
+
+Plugins do two things; listen for events and update the DOM. But what events should you listen to? To make it easier we've developed a set of [listener base classes](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-listeners) that subscribe to events for you so that all you need to do is evaluate the DOM to see if you should run, and then handle the processing when the DOM is ready.
+
+## Writing a Plugin from Scratch
+
+If you don't want to use a listener base class then starting with base principles a plugin is just a class. This is a plugin:
 
 ```
 class MyPlugin {
@@ -64,6 +70,27 @@ Call the `done` callback only when your task is completed.
 
 You'll want to be able to log your process, you can do that using the `logManager` on the `orsa` object. It has three methods `info`, `warn`, and `error`. We **strongly** recommend against using error and go with a `warn` message instead, where you state that you were unable to complete your task. `error` outputs an error message but also stops processing when the phase completes. So use `error` wisely.
 
-# The Easier Route
+# What Should I Export
 
-Plugins do two things; listen for events and update the DOM. But what events should you listen to? To make it easier we've developed a set of [listener base classes](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-listeners) that subscribe to events for you so that all you need to do is evaluate the DOM to see if you should run, and then handle the processing when the DOM is ready.
+If you are creating a plugin in it's own node package (as you should), then you'll want to have the `main` point to the plugin, or an array of plugins, like so:
+
+```
+module.exports = require('./src/my-groovy-plugin');
+```
+
+If you have multiple plugins in the same project, which is totally fine, then go this way with it:
+
+```
+module.exports = [
+  require('./src/my-groovy-plugin'),
+  require('./src/my-awesome-plugin'),
+];
+```
+
+# The DOM
+
+Most of what plugins do is [manipulate the DOM](
+https://github.com/orsa-actual/orsa/tree/master/packages/orsa-dom
+). The [orsa-dom project](
+https://github.com/orsa-actual/orsa/tree/master/packages/orsa-dom
+) is where you'll find out more on how to do that.

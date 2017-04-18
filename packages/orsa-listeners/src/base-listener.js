@@ -55,8 +55,8 @@ class BaseListener {
     this.orsa.logManager.info(`${this.constructor.name}: ${text}`);
   }
 
-  logWarning(text) {
-    this.orsa.logManager.warning(`${this.constructor.name}: ${text}`);
+  logWarn(text) {
+    this.orsa.logManager.warn(`${this.constructor.name}: ${text}`);
   }
 
   logError(text) {

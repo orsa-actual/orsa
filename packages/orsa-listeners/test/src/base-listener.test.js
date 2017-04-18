@@ -35,7 +35,7 @@ describe('orsa base listener', () => {
     const op = new BaseListener();
     op.initialize({
       logManager: {
-        warning: (text) => {
+        warn: (text) => {
           expect(text).to.eql('BaseListener: warning');
         },
         info: (text) => {
@@ -46,7 +46,7 @@ describe('orsa base listener', () => {
         },
       },
     });
-    op.logWarning('warning');
+    op.logWarn('warning');
     op.logInfo('info');
     op.logError('error');
   });
