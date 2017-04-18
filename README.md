@@ -1,4 +1,4 @@
-<img src="/assets/logo.png" align="right" style="width: 250px;" />
+<img src="/assets/logo.png" align="right" width="350" />
 
 # Orsa
 
