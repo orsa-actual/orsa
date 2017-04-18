@@ -2,6 +2,8 @@
 
 # Orsa
 
+<a href="https://travis-ci.org/orsa-actual/orsa"><img alt="Travis Status" src="https://img.shields.io/travis/orsa-actual/orsa/master.svg?label=travis"></a> <img alt="MIT License" src="https://img.shields.io/packagist/l/doctrine/orm.svg">
+
 Orsa is a system for monitoring a set of software projects. An easy way to think of it is like the code intelligence system that's built into an IDE, but headless and queryable so that you can get access to every thing it finds. It's also [pluggable](https://github.com/orsa-actual/orsa/blob/master/docs/plugins.md)), so if it doesn't get the data you need then you can easily add more scanners, indexers, summarizers or rules.
 
 As software projects grow in both code size and contributors, keeping track of it can be a problem. What node modules define the `Selector` React object? What modules will be effected when I make a change? Who uses the `inverted` attribute on the `Button` component? These questions, and more, are what Orsa was designed to answer.
