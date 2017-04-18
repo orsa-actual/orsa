@@ -1,4 +1,5 @@
 <img src="/assets/logo.png" style="float: right; margin-left: 20; margin-bottom: 20; width: 30%;" />
+
 # Orsa
 
 Orsa is a system for monitoring software project code. An easy way to think of it is like the code intelligence system that's built into an IDE, but headless and queryable so that you can get access to every thing it finds. It's also pluggable, so if it doesn't get the data you need then you can easily add more scanners, indexers, summarizers or rules.
