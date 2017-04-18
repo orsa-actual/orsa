@@ -6,7 +6,7 @@ describe('orsa base listener', () => {
     const op = new Plugin();
     op.initialize({
       logManager: {
-        warning: (text) => {
+        warn: (text) => {
           expect(text).to.eql(
             'OrsaProjectFsScannerPlugin: No path in the configuration'
           );
@@ -20,7 +20,7 @@ describe('orsa base listener', () => {
     const op = new Plugin();
     op.initialize({
       logManager: {
-        warning: (text) => {
+        warn: (text) => {
           expect(text).to.eql(
             'OrsaProjectFsScannerPlugin: No path in the configuration'
           );

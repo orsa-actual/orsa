@@ -31,7 +31,7 @@ class OrsaProjectFsScannerPlugin extends BaseListener {
         done();
       });
     } else {
-      this.logWarning('No path in the configuration');
+      this.logWarn('No path in the configuration');
     }
   }
 }
