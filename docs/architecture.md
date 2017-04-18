@@ -31,3 +31,7 @@ For a single project, or smaller clusters of projects, the Orsa in-memory DOM an
 FP is so hot right now, so why is Orsa an OOP system? The value that comes out of ORSA is the Document Object Model (DOM). The DOM has all the projects, all the files, the metadata for the projects and files, and so on. And, by their very nature a DOM is an **Object** model comprised of objects. So, since the DOM is classes and objects it stands to reason that plugins and the task manager, should be as well.
 
 That being said, there is nothing precluding someone from creating a plugin that in turn takes a set of functions which it then runs against the DOM.
+
+## Why Lerna?
+
+You may have noticed the structure of this repo is to have the modules in a `packages` directory. That's because we are using [Lerna](https://github.com/lerna/lerna) which makes it a **lot easier** to develop systems that are an eco-system of smaller modules and plugins.
