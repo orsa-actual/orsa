@@ -10,3 +10,4 @@ As software projects grow in both code size and contributors, keeping track of i
 ## Origin of the name
 
 Orsa is the word for a female bear in Spanish. And like a bear with her cubs Orsa gives you the opportunity to watch over you codebase and nurture it into the system you've always wanted.
+
