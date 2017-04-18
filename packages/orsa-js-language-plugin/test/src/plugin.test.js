@@ -100,8 +100,8 @@ const createElement = (js) => {
       readFileSync: () => js,
     },
   });
-  fe.metadata.set('javascript/ast', ast);
-  fe.metadata.set('javascript/lines', lines);
+  fe.metadata.set('js.ast', ast);
+  fe.metadata.set('js.lines', lines);
   return fe;
 };
 
@@ -190,8 +190,8 @@ c`
     const op = new Plugin();
     const fe = createElement(jsSample);
     op.process(fe, () => {
-      expect(fe.metadata.get('react/usages')).to.eql([]);
-      expect(fe.metadata.get('react/imports')).to.eql({
+      expect(fe.metadata.get('js.usages')).to.eql([]);
+      expect(fe.metadata.get('js.imports')).to.eql({
         fs: 'fs',
         foo: 'foo',
       });
@@ -202,13 +202,13 @@ c`
     const op = new Plugin();
     const fe = createElement(simpleReactSample);
     op.process(fe, () => {
-      expect(fe.metadata.get('react/usages')[0].name).to.eql('div');
-      expect(fe.metadata.get('react/imports')).to.eql({
+      expect(fe.metadata.get('js.usages')[0].name).to.eql('div');
+      expect(fe.metadata.get('js.imports')).to.eql({
         React: 'react',
         foo: 'bar',
         bar: 'bar',
       });
-      expect(fe.metadata.get('react/classes')[0].name).to.eql('MyComponent');
+      expect(fe.metadata.get('js.classes')[0].name).to.eql('MyComponent');
     });
   });
 
@@ -216,9 +216,9 @@ c`
     const op = new Plugin();
     const fe = createElement(statelessComponentSample);
     op.process(fe, () => {
-      expect(fe.metadata.get('react/usages')[0].name).to.eql('div');
-      expect(fe.metadata.get('react/imports')).to.eql({});
-      expect(fe.metadata.get('react/classes')[0].name).to.eql('Foo');
+      expect(fe.metadata.get('js.usages')[0].name).to.eql('div');
+      expect(fe.metadata.get('js.imports')).to.eql({});
+      expect(fe.metadata.get('js.classes')[0].name).to.eql('Foo');
     });
   });
 
@@ -226,9 +226,9 @@ c`
     const op = new Plugin();
     const fe = createElement(createClassSample);
     op.process(fe, () => {
-      expect(fe.metadata.get('react/usages')[0].name).to.eql('div');
-      expect(fe.metadata.get('react/imports')).to.eql({});
-      expect(fe.metadata.get('react/classes')[0].name).to.eql('Bar');
+      expect(fe.metadata.get('js.usages')[0].name).to.eql('div');
+      expect(fe.metadata.get('js.imports')).to.eql({});
+      expect(fe.metadata.get('js.classes')[0].name).to.eql('Bar');
     });
   });
 
@@ -236,15 +236,15 @@ c`
     const op = new Plugin();
     const fe = createElement(harderReactSample);
     op.process(fe, () => {
-      expect(fe.metadata.get('react/usages')[0].name).to.eql('Button');
-      expect(fe.metadata.get('react/imports')).to.eql({
+      expect(fe.metadata.get('js.usages')[0].name).to.eql('Button');
+      expect(fe.metadata.get('js.imports')).to.eql({
         React: 'react',
         My: 'my',
         Button: 'button',
       });
-      expect(fe.metadata.get('react/classes')[0].name).to.eql('MyComponent');
-      expect(fe.metadata.get('react/classes')[0].reactComponent).to.be.true;
-      expect(fe.metadata.get('react/classes')[0].jsDoc).to.eql({
+      expect(fe.metadata.get('js.classes')[0].name).to.eql('MyComponent');
+      expect(fe.metadata.get('js.classes')[0].reactComponent).to.be.true;
+      expect(fe.metadata.get('js.classes')[0].jsDoc).to.eql({
         description: 'Foo',
         tags: [],
       });
@@ -255,18 +255,18 @@ c`
     const op = new Plugin();
     const fe = createElement(classExample);
     op.process(fe, () => {
-      expect(fe.metadata.get('react/classes')[0].name).to.eql('Foo');
+      expect(fe.metadata.get('js.classes')[0].name).to.eql('Foo');
       expect(
-        fe.metadata.get('react/classes')[0].superClass
+        fe.metadata.get('js.classes')[0].superClass
       ).to.eql('AnotherThing');
-      expect(fe.metadata.get('react/classes')[0].methods[0].name).to.eql('pi');
-      expect(fe.metadata.get('react/classes')[0].methods[0].kind).to.eql('get');
-      expect(fe.metadata.get('react/classes')[0].methods[1].name).to.eql('foo');
+      expect(fe.metadata.get('js.classes')[0].methods[0].name).to.eql('pi');
+      expect(fe.metadata.get('js.classes')[0].methods[0].kind).to.eql('get');
+      expect(fe.metadata.get('js.classes')[0].methods[1].name).to.eql('foo');
       expect(
-        fe.metadata.get('react/classes')[0].methods[1].kind
+        fe.metadata.get('js.classes')[0].methods[1].kind
       ).to.eql('method');
       expect(
-        fe.metadata.get('react/classes')[0].methods[1].params[0].name
+        fe.metadata.get('js.classes')[0].methods[1].params[0].name
       ).to.eql('a');
     });
   });

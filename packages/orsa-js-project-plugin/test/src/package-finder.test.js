@@ -128,10 +128,12 @@ describe('orsa js project plugin', () => {
             expect(value).to.eql('node');
           } else if (key === 'versionChanged') {
             expect(value).to.be.false;
-          } else if (key === 'modules') {
-            expect(value).to.be.null;
-          } else if (key === 'test') {
-            expect(value).to.be.null;
+          } else if (key === 'js.packageJSON') {
+            expect(value).to.eql({
+              version: '0.0.2',
+            });
+          } else {
+            expect(false).to.be.true;
           }
         },
       },

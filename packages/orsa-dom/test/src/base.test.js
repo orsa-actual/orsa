@@ -8,6 +8,13 @@ describe('orsa project', () => {
     expect(op.type).to.equal('');
   });
 
+  it('should convert toObject', () => {
+    const op = new OrsaBase(null);
+    expect(op.toObject()).to.eql({
+      type: '',
+    });
+  });
+
   it('should save', () => {
     const op = new OrsaBase(null);
     expect(op.save()).to.eql({

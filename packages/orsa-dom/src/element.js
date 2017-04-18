@@ -14,9 +14,6 @@ class Element extends Base {
     this.metadata.on(OrsaMetadata.UPDATE,
       (md, info) => this.emit(OrsaMetadata.UPDATE, info)
     );
-    this.metadata.on(OrsaMetadata.DELETE,
-      (md, info) => this.emit(OrsaMetadata.DELETE, info)
-    );
 
     this.children = new ElementSet(this, this.childrenSetOptions);
   }

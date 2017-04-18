@@ -60,8 +60,6 @@ class TypeListener extends BaseListener {
       (domElement, info) => cb(Base.CHANGED, domElement, info));
     this.listenFor(MetaData.UPDATE, this.matchPattern,
       (domElement, info) => cb(MetaData.UPDATE, domElement, info));
-    this.listenFor(MetaData.DELETE, this.matchPattern,
-      (domElement, info) => cb(MetaData.DELETE, domElement, info));
     this.listenFor(ElementSet.ADD, this.matchPattern,
       (domElement, info) => cb(ElementSet.ADD, domElement, info));
   }

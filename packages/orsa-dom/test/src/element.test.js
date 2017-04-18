@@ -12,6 +12,29 @@ describe('orsa element', () => {
     expect(op.type).to.equal('');
   });
 
+  it('should convert to object', () => {
+    const op = new Element(null);
+    expect(op.toObject()).to.eql({
+      type: '',
+      metadata: {},
+      children: [],
+    });
+
+    const op2 = new Element(null);
+    op.children.add(op2);
+    expect(op.toObject()).to.eql({
+      type: '',
+      metadata: {},
+      children: [
+        {
+          type: '',
+          metadata: {},
+          children: [],
+        },
+      ],
+    });
+  });
+
   it('should have an empty children array', () => {
     const op = new Element(null);
     expect(op.children.toArray()).to.eql([]);
@@ -28,19 +51,6 @@ describe('orsa element', () => {
       done();
     });
     op.metadata.set('foo', 'bar');
-  });
-
-  it('should rebroadcast metadata deletes', (done) => {
-    const op = new Element({
-      emit: () => {},
-    });
-    op.on(OrsaMetadata.DELETE, (obj, { key, }) => {
-      expect(obj === op).to.be.true;
-      expect(key).to.eql('foo');
-      done();
-    });
-    op.metadata.set('foo', 'bar');
-    op.metadata.delete('foo');
   });
 
   it('should rebroadcast metadata updates', (done) => {

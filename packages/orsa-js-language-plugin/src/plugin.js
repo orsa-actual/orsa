@@ -204,8 +204,9 @@ const findImportsAndComponents = (ast, lines, usages, imports, classes) =>
 
 class OrsaJsLanguagePlugin extends FileListener {
   shouldProcess(domElement) {
-    return domElement.metadata.get('javascript/ast') &&
-      !domElement.metadata.get('react/usages');
+    return domElement.metadata.get('js.ast') &&
+      domElement.metadata.get('js.lines') &&
+      !domElement.metadata.get('js.usages');
   }
 
   process(domElement, cb) {
@@ -214,8 +215,8 @@ class OrsaJsLanguagePlugin extends FileListener {
     const classes = [];
 
     findImportsAndComponents(
-      domElement.metadata.get('javascript/ast'),
-      domElement.metadata.get('javascript/lines'),
+      domElement.metadata.get('js.ast'),
+      domElement.metadata.get('js.lines'),
       usages,
       imports,
       classes
@@ -230,9 +231,9 @@ class OrsaJsLanguagePlugin extends FileListener {
       }
     });
 
-    domElement.metadata.set('react/usages', sortUsages(usages));
-    domElement.metadata.set('react/imports', imports);
-    domElement.metadata.set('react/classes', classes);
+    domElement.metadata.set('js.usages', sortUsages(usages));
+    domElement.metadata.set('js.imports', imports);
+    domElement.metadata.set('js.classes', classes);
 
     cb();
   }

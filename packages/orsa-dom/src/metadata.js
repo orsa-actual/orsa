@@ -3,15 +3,13 @@ const merge = require('lodash.merge');
 const keys = require('lodash.keys');
 const set = require('lodash.set');
 const get = require('lodash.get');
-const pickBy = require('lodash.pickby');
-const mapValues = require('lodash.mapvalues');
 const Base = require('./base');
 
 class MetaData extends Base {
-  constructor(orsa, metadata = {}, options = {}) {
+  constructor(orsa, metadata = {}) {
     super(orsa, null);
     this.metadata = metadata;
-    this.options = options;
+    this.temporary = {};
     this.type = MetaData.TYPE;
   }
 
@@ -20,9 +18,9 @@ class MetaData extends Base {
       this.metadata,
       metadataObject.metadata
     );
-    this.options = merge(
-      this.options,
-      metadataObject.options
+    this.temporary = merge(
+      this.temporary,
+      metadataObject.temporary
     );
   }
 
@@ -30,7 +28,7 @@ class MetaData extends Base {
     let match = true;
     keys(pattern).forEach((k) => {
       if (match) {
-        if (this.metadata[k] && this.metadata[k] === pattern[k]) {
+        if (get(this.metadata, k) === pattern[k] || get(this.temporary, k) === pattern[k]) {
           match = true;
         } else {
           match = false;
@@ -40,54 +38,36 @@ class MetaData extends Base {
     return match;
   }
 
-  set(key, value, options) {
-    set(this.metadata, key, value);
-    set(this.options, key, options || {});
-    this.emit(MetaData.UPDATE, { key, value, options, });
+  set(key, value, options = {}) {
+    if (options.temporary) {
+      set(this.temporary, key, value);
+    } else {
+      set(this.metadata, key, value);
+    }
+    this.emit(MetaData.UPDATE, { key, value, });
   }
 
   get(key) {
-    return get(this.metadata, key, null);
-  }
-
-  getOptions(key) {
-    return get(this.options, key, null);
-  }
-
-  delete(key) {
-    delete this.metadata[key];
-    delete this.options[key];
-    this.emit(MetaData.DELETE, { key, });
-  }
-
-  get withoutTemporary() {
-    return pickBy(this.metadata, (v, k) => !(this.options[k] && this.options[k].temporary));
-  }
-
-  get optionsWithoutTemporary() {
-    return pickBy(this.options, (v, k) => !(this.options[k] && this.options[k].temporary));
+    return get(this.metadata, key, null) || get(this.temporary, key, null);
   }
 
   save() {
     return merge(super.save(), {
-      metadata: this.withoutTemporary,
-      options: this.optionsWithoutTemporary,
+      metadata: this.metadata,
     });
   }
 
   restore(data) {
     super.restore(data);
     this.metadata = data.metadata;
-    this.options = data.options;
   }
 
   toObject() {
-    return mapValues(this.withoutTemporary);
+    return this.metadata;
   }
 }
 
 MetaData.UPDATE = 'MetaData:UPDATE';
-MetaData.DELETE = 'MetaData:DELETE';
 
 MetaData.TYPE = 'MetaData';
 

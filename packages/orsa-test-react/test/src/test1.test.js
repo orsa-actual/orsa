@@ -8,32 +8,14 @@ const {
   File,
 } = require('orsa-dom');
 
-/*
-Wallaby copies source files and their instrumented versions into
-temp directories. These tests uses files located in the fixtures directories.
-So in order to access them we need to get Wallaby to copy them first by
-hacking 'wallaby.json'. Then do a little path munging to get to them. But
-only if we are running in Wallaby. We don't want to mess up `npm t`, right?
-*/
-const fixWallabyPaths = (p) => {
-  let newPath = p;
-  /* istanbul ignore next */
-  if (p.match(/\/instrumented\//i) && p.match(/wallaby/i)) {
-    /* istanbul ignore next */
-    newPath = newPath.replace(/instrumented/, 'original');
-  }
-  return newPath;
-};
-
 describe('orsa tester', () => {
   it('test1 should have projects', (done) => {
-    const dirName = fixWallabyPaths(__dirname);
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(dirName, '../../fixtures/test1'),
+        path: path.resolve(__dirname, '../../fixtures/test1'),
       },
     });
     oc.run(() => {
@@ -47,13 +29,12 @@ describe('orsa tester', () => {
   });
 
   it('test1 should be idempotent', (done) => {
-    const dirName = fixWallabyPaths(__dirname);
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(dirName, '../../fixtures/test1'),
+        path: path.resolve(__dirname, '../../fixtures/test1'),
       },
     });
     oc.run(() => {
@@ -74,13 +55,12 @@ describe('orsa tester', () => {
   });
 
   it('test1 save/restore and run again without change', (done) => {
-    const dirName = fixWallabyPaths(__dirname);
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(dirName, '../../fixtures/test1'),
+        path: path.resolve(__dirname, '../../fixtures/test1'),
       },
     });
     oc.run(() => {
@@ -99,7 +79,7 @@ describe('orsa tester', () => {
         require('orsa-project-fs-scanner-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(dirName, '../../fixtures/test1'),
+        path: path.resolve(__dirname, '../../fixtures/test1'),
       },
     });
 
@@ -119,14 +99,13 @@ describe('orsa tester', () => {
   });
 
   it('test1 should be seen as node projects', (done) => {
-    const dirName = fixWallabyPaths(__dirname);
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
         require('orsa-js-project-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(dirName, '../../fixtures/test1'),
+        path: path.resolve(__dirname, '../../fixtures/test1'),
       },
     });
     oc.run(() => {
@@ -138,7 +117,6 @@ describe('orsa tester', () => {
   });
 
   it('test1 should have projects and files', (done) => {
-    const dirName = fixWallabyPaths(__dirname);
     const oc = new Orsa({
       plugins: [
         require('orsa-project-fs-scanner-plugin'),
@@ -146,7 +124,7 @@ describe('orsa tester', () => {
         require('orsa-js-language-plugin'),
       ],
       'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(dirName, '../../fixtures/test1'),
+        path: path.resolve(__dirname, '../../fixtures/test1'),
       },
     });
     oc.run(() => {

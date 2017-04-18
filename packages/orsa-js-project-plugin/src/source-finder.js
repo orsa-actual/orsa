@@ -58,10 +58,10 @@ class OrsaNodeProjectPluginSourceFinder extends ProjectListener {
           fileElement.name = file;
           domElement.children.add(fileElement);
 
-          fileElement.metadata.set('javascript/ast', ast, {
+          fileElement.metadata.set('js.lines', lines, {
             temporary: true,
           });
-          fileElement.metadata.set('javascript/lines', lines, {
+          fileElement.metadata.set('js.ast', ast, {
             temporary: true,
           });
         });

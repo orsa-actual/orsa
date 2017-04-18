@@ -21,13 +21,14 @@ describe('orsa js build plugin', () => {
         get: (key) => {
           if (key === 'projectType') {
             return 'node';
-          }
-          if (key === 'builtVersion') {
+          } else if (key === 'builtVersion') {
             return '0.1';
-          }
-          if (key === 'node/modules') {
+          } else if (key === 'js.modules') {
             return null;
+          } else if (key === 'js.packageJSON') {
+            return {};
           }
+          expect(false).to.be.true;
         },
       },
       version: '0.1',
@@ -62,8 +63,13 @@ describe('orsa js build plugin', () => {
       localPath: 'foo',
       metadata: {
         set: (key, value) => {
-          expect(key).to.eql('node/modules');
+          expect(key).to.eql('js.modules');
           expect(value).to.eql({});
+        },
+        get: (key) => {
+          if (key === 'js.packageJSON') {
+            return {};
+          }
         },
       },
       version: '0.1',
@@ -80,15 +86,24 @@ describe('orsa js build plugin', () => {
           expect(pattern).to.eql('./node_modules/*/package.json');
           expect(options.cwd).to.not.be.null;
           return [
-            'a',
+            'a.json',
+            'b.json',
+            'c.json',
           ];
         },
       },
       fs: {
         readFileSync: (path) => {
           expect(path).to.not.be.null;
+          let name = 'a';
+          if (path.match(/b\.json$/)) {
+            name = 'b';
+          }
+          if (path.match(/c\.json$/)) {
+            name = 'c';
+          }
           return JSON.stringify({
-            name: 'orsa',
+            name,
             version: '0.1',
           });
         },
@@ -104,10 +119,36 @@ describe('orsa js build plugin', () => {
       localPath: 'foo',
       metadata: {
         set: (key, value) => {
-          expect(key).to.eql('node/modules');
+          expect(key).to.eql('js.modules');
           expect(value).to.eql({
-            orsa: '0.1',
+            a: {
+              type: 'direct',
+              version: '0.1',
+              requestedVersion: '0.1',
+            },
+            b: {
+              type: 'dev',
+              version: '0.1',
+              requestedVersion: '0.2',
+            },
+            c: {
+              type: 'indirect',
+              version: '0.1',
+              requestedVersion: null,
+            },
           });
+        },
+        get: (key) => {
+          if (key === 'js.packageJSON') {
+            return {
+              dependencies: {
+                a: '0.1',
+              },
+              devDependencies: {
+                b: '0.2',
+              },
+            };
+          }
         },
       },
       version: '0.1',

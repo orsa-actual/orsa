@@ -38,11 +38,10 @@ class OrsaNodeProjectPluginPackageFinder extends ProjectListener {
             versionChanged,
             { temporary: true, }
           );
-          if (versionChanged) {
-            domElement.metadata.set('modules', null);
-            domElement.metadata.set('test', null);
-          }
           domElement.version = pkg.version;
+          domElement.metadata.set('js.packageJSON', pkg, {
+            temporary: true,
+          });
           domElement.metadata.set('projectType', 'node');
         }
       }

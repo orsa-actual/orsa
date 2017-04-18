@@ -46,7 +46,6 @@ describe('orsa type listener', () => {
     expect(names).to.eql([
       Base.CHANGED,
       MetaData.UPDATE,
-      MetaData.DELETE,
       ElementSet.ADD,
     ]);
   });
@@ -81,7 +80,7 @@ describe('orsa type listener', () => {
     keys(ncb).forEach((k) => {
       ncb[k]({}, elem, info);
       expect(op.domElement).to.eql(elem);
-      expect(op.evtName).to.eql(k);
+      expect(op.evtName).to.equal(k);
       expect(op.info).to.eql(info);
     });
   });

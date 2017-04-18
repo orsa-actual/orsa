@@ -21,10 +21,6 @@ describe('orsa metadata', () => {
     expect(md.toObject()).to.eql({
       foo: 'bar',
     });
-    expect(md.getOptions('foo')).to.eql({
-      version: 1,
-    });
-    expect(md.getOptions('fooz')).to.be.null;
   });
 
   it('should allow for updating', () => {
@@ -36,17 +32,6 @@ describe('orsa metadata', () => {
     md.set('foo', 'baz');
     expect(md.toObject()).to.eql({
       foo: 'baz',
-    });
-  });
-
-  it('should allow for deleting', () => {
-    const md = new OrsaMetadata();
-    md.set('foo', 'bar');
-    expect(md.toObject()).to.eql({
-      foo: 'bar',
-    });
-    md.delete('foo');
-    expect(md.toObject()).to.eql({
     });
   });
 
@@ -109,17 +94,5 @@ describe('orsa metadata', () => {
     expect(md.match({
       fooz: 'baz',
     })).to.be.false;
-  });
-
-  it('should emit support a secondary emitter on delete', (done) => {
-    const emitter = new EventEmitter();
-    const md = new OrsaMetadata(emitter, {});
-    md.set('foo', 'bar');
-    emitter.on(OrsaMetadata.DELETE, (mdo, { key, }) => {
-      expect(md === mdo).to.be.true;
-      expect(key).to.eql('foo');
-      done();
-    });
-    md.delete('foo');
   });
 });

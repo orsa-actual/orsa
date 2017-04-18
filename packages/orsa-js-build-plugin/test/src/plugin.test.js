@@ -22,40 +22,13 @@ describe('orsa js build plugin', () => {
           if (key === 'projectType') {
             return 'node';
           }
-          if (key === 'versionChanged') {
-            return true;
-          }
-        },
-      },
-    })).to.be.true;
-
-    expect(op.shouldProcess({
-      metadata: {
-        get: (key) => {
-          if (key === 'projectType') {
-            return 'node';
-          }
           if (key === 'builtVersion') {
             return '1.0';
           }
         },
+        version: null,
       },
-      version: '0.1',
     })).to.be.true;
-
-    expect(op.shouldProcess({
-      metadata: {
-        get: (key) => {
-          if (key === 'projectType') {
-            return 'node';
-          }
-          if (key === 'builtVersion') {
-            return '0.1';
-          }
-        },
-      },
-      version: '0.1',
-    })).to.not.be.true;
   });
 
   it('should build with a different command', () => {
@@ -140,14 +113,11 @@ describe('orsa js build plugin', () => {
     op.process({
       metadata: {
         set: (key, value) => {
-          if (key === 'node/build/stdout') {
+          if (key === 'node.build.stdout') {
             expect(value).to.eql('foo');
           }
-          if (key === 'node/build/stderr') {
+          if (key === 'node.build.stderr') {
             expect(value).to.eql('bar');
-          }
-          if (key === 'node/modules') {
-            expect(value).to.be.null;
           }
         },
       },
@@ -161,7 +131,7 @@ describe('orsa js build plugin', () => {
     const op = new Plugin({
       exec: (command, options, cb) => {
         expect(options.cwd).to.not.be.null;
-        expect(command === 'npm install' || command === 'npm test')
+        expect(command === 'npm install')
           .to.be.true;
         cb('ack!', 'foo', 'bar');
       },
@@ -177,10 +147,10 @@ describe('orsa js build plugin', () => {
     op.process({
       metadata: {
         set: (key, value) => {
-          if (key === 'node/build/stdout') {
+          if (key === 'node.build.stdout') {
             expect(value).to.eql('foo');
           }
-          if (key === 'node/build/stderr') {
+          if (key === 'node.build.stderr') {
             expect(value).to.eql('bar');
           }
         },
@@ -209,10 +179,10 @@ describe('orsa js build plugin', () => {
     op.process({
       metadata: {
         set: (key, value) => {
-          if (key === 'node/build/stdout') {
+          if (key === 'node.build.stdout') {
             expect(value).to.eql('foo');
           }
-          if (key === 'node/build/stderr') {
+          if (key === 'node.build.stderr') {
             expect(value).to.eql('bar');
           }
         },

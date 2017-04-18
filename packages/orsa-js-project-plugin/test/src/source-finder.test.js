@@ -115,8 +115,8 @@ describe('orsa js source finder plugin', () => {
     const p1 = new Project();
     p1.localPath = 'bar';
     op.process(p1, () => {
-      expect(p1.children.toArray()[0].metadata.get('javascript/ast')).to.not.be.null;
-      expect(p1.children.toArray()[0].metadata.get('javascript/lines')).to.not.be.null;
+      expect(p1.children.toArray()[0].metadata.get('js.ast')).to.not.be.null;
+      expect(p1.children.toArray()[0].metadata.get('js.lines')).to.not.be.null;
       done();
     });
   });

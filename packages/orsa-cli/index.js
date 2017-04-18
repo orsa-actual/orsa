@@ -49,7 +49,7 @@ module.exports = (opts) => {
     });
     oc.run(() => {
       if (options.program.output) {
-        fs.writeFileSync(options.program.output,
+        options.fs.writeFileSync(options.program.output,
           JSON.stringify(oc.toObject(), null, 2));
       }
       options.process.exit(exitStatus);
