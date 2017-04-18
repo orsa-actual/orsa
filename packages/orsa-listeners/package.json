@@ -2,6 +2,7 @@
   "name": "orsa-listeners",
   "version": "0.0.3",
   "description": "Orsa listener types",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-listeners",
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",

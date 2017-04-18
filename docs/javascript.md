@@ -1,0 +1,10 @@
+# Orsa Javascript guide
+
+Orsa is written in Javascript and we like it, so it makes sense that we natively support scanning it. Javascript is supported through a series of plugins all named in the form `orsa-js-*-plugin`. Here are notable plugins for Javascript that you can use:
+
+| Plugin | Description |
+|----|----|
+| [orsa-js-project-plugin](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-project-plugin) | This is the only required plugin for JS support. It serves two functions, first to identify Javascript projects by checking for the existence of `package.json`. And second to parse all the JS source files in the project (not including in `node_modules`). Without the file DOM elements and AST parsing the other downstream plugins wouldn't have anything to do. |
+| [orsa-js-build-plugin](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-build-plugin) | This plugin builds and tests the project and puts the output into the DOM. It's important too, because from it you get the `node_modules` directory which you can then use for dependency analysis. |
+| [orsa-js-dependency-plugin](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-dependency-plugin) | This plugin identifies all the packages used by the project by surfing the `node_modules` directory. It also compares them against the `package.json` to see if each module is a direct dependency, a development dependency or an indirect dependency. This plugin requires that you also use [orsa-js-build-plugin](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-build-plugin) and that you are using a flattened package manager like `npm` (greater than v3) or `yarn` |
+| [orsa-js-language-plugin](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-language-plugin) | This plugin parses through the ASTs of the files inside a project to pick out `requires`, `imports`, classes, react components, react component invocations and more. It's kinda the reason you showed up, you should run it. It's fun. The kids like it. |

@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "description": "Orsa AST parser",
   "main": "index.js",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-ast-parser",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",
     "lint": "eslint index.js src/**/*.js test/**/*.js"

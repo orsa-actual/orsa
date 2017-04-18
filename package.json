@@ -1,8 +1,7 @@
 {
   "name": "orsa",
-  "version": "0.0.1",
-  "description": "Code DOM",
-  "main": "index.js",
+  "private": true,
+  "description": "Code analysis engine",
   "scripts": {
     "test": "make bootstrap && make test && make lint",
     "lint": "make lint",

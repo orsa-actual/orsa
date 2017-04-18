@@ -2,6 +2,7 @@
   "name": "orsa-core",
   "version": "0.0.3",
   "description": "Orsa system core",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-core",
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",

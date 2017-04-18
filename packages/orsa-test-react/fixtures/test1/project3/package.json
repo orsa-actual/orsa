@@ -1,5 +1,6 @@
 {
   "name": "orsa-test-fixtures-project3",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-test-react/fixtures/test1/project3",
   "version": "0.0.1",
   "description": "Test project 3",
   "main": "index.js",

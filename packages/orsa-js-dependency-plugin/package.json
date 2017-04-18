@@ -2,6 +2,7 @@
   "name": "orsa-js-dependency-plugin",
   "version": "0.0.3",
   "description": "Orsa plugin for Javascript project dependency scanning",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-dependency-plugin",
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",

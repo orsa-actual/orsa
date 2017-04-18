@@ -2,6 +2,7 @@
   "name": "orsa-js-language-plugin",
   "version": "0.0.3",
   "description": "Orsa plugin for Javascript language parsing",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-language-plugin",
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",

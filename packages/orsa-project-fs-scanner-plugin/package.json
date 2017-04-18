@@ -2,6 +2,7 @@
   "name": "orsa-project-fs-scanner-plugin",
   "version": "0.0.3",
   "description": "Orsa file system based project scanner",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-project-fs-scanner-plugin",
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",
