@@ -65,11 +65,11 @@ class OrsaJsBuildPlugin extends ProjectListener {
   }
 
   process(project, cb) {
-    project.metadata.set('builtVersion', project.version);
     project.metadata.set('js.modules', null);
     this.runBuild(project, (err) => {
       if (!err) {
         this.test(project, () => {
+          project.metadata.set('builtVersion', project.version);
           cb();
         });
       } else {

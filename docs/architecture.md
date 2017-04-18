@@ -22,6 +22,10 @@ It's important to note that Orsa has a single event stream for all the elements 
 
 Orsa runs a set of phases; `setup`, `scan`, `index`, `summarize` and `shutdown`. Strictly speaking your can do whatever it wants any time it wants in any of these phases. And the DOM is completely unlocked in all phases. But the phase architecture, familiar as a pattern to anyone who has used Apache, or used a testing framework like Mocha, provides a nice contract for plugin authors to run their code at the *correct time*.
 
+## What About Scaling?
+
+For a single project, or smaller clusters of projects, the Orsa in-memory DOM and whatever you choose to export it to should be sufficient to get a lot of useful metadata about your projects. For larger project you should deploy an orsa-server and then point your `orsa` CLI at it on a per-project basis in your CI/CD pipeline. Even for small projects an orsa-server would be a good choice to get a nice overall interface on your projects.
+
 ## Why OOP?
 
 FP is so hot right now, so why is Orsa an OOP system? The value that comes out of ORSA is the Document Object Model (DOM). The DOM has all the projects, all the files, the metadata for the projects and files, and so on. And, by their very nature a DOM is an **Object** model comprised of objects. So, since the DOM is classes and objects it stands to reason that plugins and the task manager, should be as well.
