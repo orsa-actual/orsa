@@ -24,7 +24,7 @@ Orsa runs a set of phases; `setup`, `scan`, `index`, `summarize` and `shutdown`.
 
 ## What About Scaling?
 
-For a single project, or smaller clusters of projects, the Orsa in-memory DOM and whatever you choose to export it to should be sufficient to get a lot of useful metadata about your projects. For larger project you should deploy an orsa-server and then point your `orsa` CLI at it on a per-project basis in your CI/CD pipeline. Even for small projects an orsa-server would be a good choice to get a nice overall interface on your projects.
+For a single project, or smaller clusters of projects, the Orsa in-memory DOM and whatever you choose to export it to should be sufficient to get a lot of useful metadata about your projects. For larger project you should deploy an [orsa-server](https://github.com/orsa-actual/orsa-server) and then point your `orsa` CLI at it on a per-project basis in your CI/CD pipeline. Even for small projects an orsa-server would be a good choice to get a nice overall interface on your projects.
 
 ## Why OOP?
 
