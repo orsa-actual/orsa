@@ -1,16 +1,21 @@
-# Orsa Javascript build package
+# Orsa Server plugin
 
-Handles running the build and test commands for Javscript projects.
+Handles sending Orsa data to the [Orsa Server](https://github.com/orsa-actual/orsa-server).
 
 ## Configuration
 
-You can specify the build and test commands in your Orsa configuration like so:
+You need to tell the plugin where the server is. You do that in the configuration as shown below:
 
 ```
 {
-  'orsa-js-build-plugin': {
-    'buildCommand': 'npm i --something funky',
-    'testCommand': 'npm t --stranger things',
+  'orsa-server-plugin': {
+    url: 'http://localhost:3000/api/update',
   },
 }
+```
+
+If you are using the [command line interface](https://github.com/orsa-actual/orsa/tree/master/packages/orsa-cli) simply add the `server` command line option:
+
+```
+orsa --server http://localhost:3000/api/update
 ```
