@@ -28,7 +28,16 @@ class OrsaServerPlugin extends BaseListener {
   }
 
   addProject(node) {
-    this.dataPackets.push(node.toObject());
+    this.dataPackets.push(assign(node.toObject(),
+      {
+        children: node.children.toArray().map(c => (
+          {
+            name: c.name,
+            localPath: c.localPath,
+          }
+        )),
+      }
+    ));
   }
 
   traverse(children) {
