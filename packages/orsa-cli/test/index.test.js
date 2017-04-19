@@ -2,7 +2,18 @@
 const expect = require('chai').expect;
 const index = require('../index');
 
+class BadOrsa {
+  run(cb) {
+    cb('Error!');
+  }
+}
+
 class FakeOrsa {
+  constructor(config) {
+    FakeOrsa.created = this;
+    this.config = config;
+  }
+
   run(cb) {
     cb();
   }
@@ -91,6 +102,42 @@ describe('orsa-cli index', () => {
       },
       process: {
         exit: (status) => {
+          expect(status).to.eql(0);
+        },
+      },
+    });
+  });
+
+  it('should handle an orsa error', () => {
+    const fp = new FakeProgram();
+    fp.path = 'foo';
+    fp.output = 'bar';
+    index({
+      program: fp,
+      console: {
+        error(text) {
+          expect(text).to.eql('Error!');
+        },
+      },
+      Orsa: BadOrsa,
+      process: {
+        exit: (status) => {
+          expect(status).to.eql(1);
+        },
+      },
+    });
+  });
+
+  it('should sender to server if requested', () => {
+    const fp = new FakeProgram();
+    fp.path = 'foo';
+    fp.server = 'bar';
+    index({
+      program: fp,
+      Orsa: FakeOrsa,
+      process: {
+        exit: (status) => {
+          expect(FakeOrsa.created.config['orsa-server-plugin'].url).to.eql('bar');
           expect(status).to.eql(0);
         },
       },

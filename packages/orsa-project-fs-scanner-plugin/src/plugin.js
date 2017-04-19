@@ -23,8 +23,8 @@ class OrsaProjectFsScannerPlugin extends BaseListener {
           const npath = path.resolve(this.config[NAME].path, name);
           if (this.options.fs.statSync(npath).isDirectory()) {
             const project = new Project(this.orsa);
-            project.localPath = npath;
             project.name = name;
+            project.localPath = npath;
             this.orsa.children.add(project);
           }
         });

@@ -8,7 +8,7 @@ Orsa is a system for monitoring a set of software projects. An easy way to think
 
 As software projects grow in both code size and contributors, keeping track of it can be a problem. What node modules define the `Selector` React object? What modules will be effected when I make a change? Who uses the `inverted` attribute on the `Button` component? These questions, and more, are what Orsa was designed to answer.
 
-## How does Orsa work
+## How Does Orsa Work?
 
 Orsa itself only does four things;
 

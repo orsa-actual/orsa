@@ -77,27 +77,31 @@ describe('orsa js project plugin', () => {
           expect(path.match(/package.json$/)).to.not.be.null;
           return JSON.stringify({
             version: '0.0.2',
+            name: 'foobar',
           });
         },
       },
     });
     const spy = sinon.spy();
-    expect(op.process({
+    const domElement = {
       localPath: 'foo',
       metadata: {
-        set: (key, value) => {
+        set: (key, value, options) => {
           if (key === 'projectType') {
             expect(value).to.eql('node');
           } else if (key === 'versionChanged') {
             expect(value).to.be.true;
-          } else if (key === 'modules') {
-            expect(value).to.be.null;
-          } else if (key === 'test') {
-            expect(value).to.be.null;
+          } else if (key === 'js.packageJSON') {
+            expect(value).to.not.be.null;
+            expect(options.temporary).to.be.true;
+          } else {
+            expect(false).to.be.true;
           }
         },
       },
-    }, spy));
+    };
+    expect(op.process(domElement, spy));
+    expect(domElement.name).to.eql('foobar');
     expect(spy).to.be.called;
     expect(mspy).to.not.be.called;
   });
@@ -159,7 +163,7 @@ describe('orsa js project plugin', () => {
     op.initialize({
       on: () => {},
       logManager: {
-        warning: (t1) => {
+        warn: (t1) => {
           expect(t1).to.eql('Couldn\'t parse package.json: foo/package.json');
         },
       },

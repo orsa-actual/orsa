@@ -174,7 +174,7 @@ describe('orsa-core main', () => {
     });
 
     oc.logManager.info('foo-info');
-    oc.logManager.warning('foo-warn');
+    oc.logManager.warn('foo-warn');
     oc.logManager.error('foo-error');
     expect(expected).to.eql(3);
   });

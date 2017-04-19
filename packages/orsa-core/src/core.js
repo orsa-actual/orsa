@@ -24,7 +24,7 @@ class OrsaCore extends RootElement {
     this.runError = null;
 
     this.logManager = {
-      warning: (text) => {
+      warn: (text) => {
         this.emit('orsa.log.warn', text);
       },
       error: (text) => {

@@ -24,6 +24,7 @@ module.exports = (opts) => {
     .version(version)
     .option('-p, --path [path]', 'Projects directory path')
     .option('-o, --output [path]', 'Report output path')
+    .option('-s, --server [url]', 'Post data to the Orsa server')
     .parse(process.argv);
 
   let exitStatus = 0;
@@ -33,22 +34,37 @@ module.exports = (opts) => {
     exitStatus = 1;
   }
 
+  const config = {
+    plugins: [
+      require('orsa-project-fs-scanner-plugin'),
+      require('orsa-js-project-plugin'),
+      require('orsa-js-language-plugin'),
+      require('orsa-js-build-plugin'),
+      require('orsa-js-dependency-plugin'),
+      require('orsa-logger-bunyan-plugin'),
+      require('orsa-server-plugin'),
+    ],
+  };
+
+  if (options.program.server) {
+    config['orsa-server-plugin'] = {
+      url: options.program.server,
+    };
+  }
+
+  if (options.program.path) {
+    config['orsa-project-fs-scanner-plugin'] = {
+      path: path.resolve(options.program.path),
+    };
+  }
+
   if (exitStatus === 0) {
-    const oc = new options.Orsa({
-      plugins: [
-        require('orsa-project-fs-scanner-plugin'),
-        require('orsa-js-project-plugin'),
-        require('orsa-js-language-plugin'),
-        require('orsa-js-build-plugin'),
-        require('orsa-js-dependency-plugin'),
-        require('orsa-logger-bunyan-plugin'),
-      ],
-      'orsa-project-fs-scanner-plugin': {
-        path: path.resolve(options.program.path),
-      },
-    });
-    oc.run(() => {
-      if (options.program.output) {
+    const oc = new options.Orsa(config);
+    oc.run((err) => {
+      if (err) {
+        options.console.error(err);
+        exitStatus = 1;
+      } else if (options.program.output) {
         options.fs.writeFileSync(options.program.output,
           JSON.stringify(oc.toObject(), null, 2));
       }

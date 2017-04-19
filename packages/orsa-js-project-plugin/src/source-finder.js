@@ -48,7 +48,7 @@ class OrsaNodeProjectPluginSourceFinder extends ProjectListener {
           const { error, ast, lines, } = astParser(localPath, this.options);
 
           if (error) {
-            this.orsa.logManager.warning(`Unable to parse ${file}`);
+            this.orsa.logManager.warn(`Unable to parse ${file}`);
           }
 
           const fileElement = new File(domElement);

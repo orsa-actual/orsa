@@ -34,6 +34,31 @@ Persisted attributes are metadata values that are so critical to the function of
 
 Metadata is a critical part of the DOM, it's where plugins store everything they learn about a file or a project. Metadata supports two methods `set` and `get`:
 
+### Metadata key names
+
+**Critical Note**: Control your key names for metadata! Do not use user-generated data for key names. User generated data can contain special characters like `.` or `/` that can mess up downstream systems.
+
+Instead of doing something like this:
+
+```
+const myModuleName = 'lodash.get';
+const versions = {};
+versions[myModuleName] = '0.0.1'; // This is bad
+domElement.metadata.set('moduleVersions', versions);
+```
+
+Instead do:
+
+```
+const myModuleName = 'lodash.get';
+const versions = [];
+versions.push({
+  name: myModuleName,
+  version: '0.0.1',
+});
+domElement.metadata.set('moduleVersions', versions);
+```
+
 ### set(key, value, options)
 
 Sets a key on metadata structure. The key is in [lodash's set format](https://lodash.com/docs/4.17.4#set). `options` only supports one option at the moment, which is `temporary`. If `temporary` is set then the data is not output during save/restore or in `toObject()`. This is handy when you have big transient structures, like the AST, which are handy during processing, but which should not be stored.

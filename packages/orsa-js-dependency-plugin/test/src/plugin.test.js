@@ -56,7 +56,7 @@ describe('orsa js build plugin', () => {
     const spy = sinon.spy();
     op.initialize({
       logManager: {
-        warning: spy,
+        warn: spy,
       },
     });
     op.process({
@@ -64,7 +64,7 @@ describe('orsa js build plugin', () => {
       metadata: {
         set: (key, value) => {
           expect(key).to.eql('js.modules');
-          expect(value).to.eql({});
+          expect(value).to.eql([]);
         },
         get: (key) => {
           if (key === 'js.packageJSON') {
@@ -112,7 +112,7 @@ describe('orsa js build plugin', () => {
     const spy = sinon.spy();
     op.initialize({
       logManager: {
-        warning: spy,
+        warn: spy,
       },
     });
     op.process({
@@ -120,23 +120,25 @@ describe('orsa js build plugin', () => {
       metadata: {
         set: (key, value) => {
           expect(key).to.eql('js.modules');
-          expect(value).to.eql({
-            a: {
+          expect(value).to.eql([
+            {
+              name: 'a',
               type: 'direct',
               version: '0.1',
               requestedVersion: '0.1',
             },
-            b: {
+            {
+              name: 'b',
               type: 'dev',
               version: '0.1',
               requestedVersion: '0.2',
             },
-            c: {
-              type: 'indirect',
+            {
+              name: 'c',
               version: '0.1',
-              requestedVersion: null,
             },
-          });
+          ]
+          );
         },
         get: (key) => {
           if (key === 'js.packageJSON') {

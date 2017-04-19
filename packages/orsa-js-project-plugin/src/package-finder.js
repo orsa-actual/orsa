@@ -22,7 +22,7 @@ class OrsaNodeProjectPluginPackageFinder extends ProjectListener {
     try {
       pkg = JSON.parse(this.options.fs.readFileSync(file));
     } catch (e) {
-      this.orsa.logManager.warning(`Couldn't parse package.json: ${file}`);
+      this.orsa.logManager.warn(`Couldn't parse package.json: ${file}`);
     }
     return pkg;
   }
@@ -38,6 +38,7 @@ class OrsaNodeProjectPluginPackageFinder extends ProjectListener {
             versionChanged,
             { temporary: true, }
           );
+          domElement.name = pkg.name;
           domElement.version = pkg.version;
           domElement.metadata.set('js.packageJSON', pkg, {
             temporary: true,

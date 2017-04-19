@@ -31,7 +31,7 @@ class OrsaJsBuildPlugin extends ProjectListener {
       },
       (error, stdout, stderr) => {
         if (error) {
-          this.orsa.logManager.warning(`${project.name} Project build failed`);
+          this.orsa.logManager.warn(`${project.name} Project build failed`);
           project.metadata.set('node.build.stdout', stdout);
           project.metadata.set('node.build.stderr', stderr);
           cb(error);
@@ -51,7 +51,7 @@ class OrsaJsBuildPlugin extends ProjectListener {
       },
       (error, stdout, stderr) => {
         if (error) {
-          this.orsa.logManager.warning(`${project.name} Project test failed`);
+          this.orsa.logManager.warn(`${project.name} Project test failed`);
           project.metadata.set('node.test.stdout', stdout);
           project.metadata.set('node.test.stderr', stderr);
           cb(error);

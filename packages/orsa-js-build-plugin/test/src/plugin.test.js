@@ -41,11 +41,11 @@ describe('orsa js build plugin', () => {
       },
     });
     const infoSpy = sinon.spy();
-    const warningSpy = sinon.spy();
+    const warnSpy = sinon.spy();
     op.initialize({
       logManager: {
         info: infoSpy,
-        warning: warningSpy,
+        warn: warnSpy,
       },
     }, {
       'orsa-js-build-plugin': {
@@ -58,7 +58,7 @@ describe('orsa js build plugin', () => {
       },
     }, () => {
       expect(infoSpy).to.be.called;
-      expect(warningSpy).to.not.be.called;
+      expect(warnSpy).to.not.be.called;
     });
   });
 
@@ -72,11 +72,11 @@ describe('orsa js build plugin', () => {
       },
     });
     const infoSpy = sinon.spy();
-    const warningSpy = sinon.spy();
+    const warnSpy = sinon.spy();
     op.initialize({
       logManager: {
         info: infoSpy,
-        warning: warningSpy,
+        warn: warnSpy,
       },
     }, {
       'orsa-js-build-plugin': {
@@ -89,7 +89,7 @@ describe('orsa js build plugin', () => {
       },
     }, () => {
       expect(infoSpy).to.be.called;
-      expect(warningSpy).to.not.be.called;
+      expect(warnSpy).to.not.be.called;
     });
   });
 
@@ -103,11 +103,11 @@ describe('orsa js build plugin', () => {
       },
     });
     const infoSpy = sinon.spy();
-    const warningSpy = sinon.spy();
+    const warnSpy = sinon.spy();
     op.initialize({
       logManager: {
         info: infoSpy,
-        warning: warningSpy,
+        warn: warnSpy,
       },
     }, {});
     op.process({
@@ -123,7 +123,7 @@ describe('orsa js build plugin', () => {
       },
     }, () => {
       expect(infoSpy).to.be.called;
-      expect(warningSpy).to.not.be.called;
+      expect(warnSpy).to.not.be.called;
     });
   });
 
@@ -137,11 +137,11 @@ describe('orsa js build plugin', () => {
       },
     });
     const infoSpy = sinon.spy();
-    const warningSpy = sinon.spy();
+    const warnSpy = sinon.spy();
     op.initialize({
       logManager: {
         info: infoSpy,
-        warning: warningSpy,
+        warn: warnSpy,
       },
     }, {});
     op.process({
@@ -157,7 +157,7 @@ describe('orsa js build plugin', () => {
       },
     }, () => {
       expect(infoSpy).to.not.be.called;
-      expect(warningSpy).to.be.called;
+      expect(warnSpy).to.be.called;
     });
   });
 
@@ -169,11 +169,11 @@ describe('orsa js build plugin', () => {
       },
     });
     const infoSpy = sinon.spy();
-    const warningSpy = sinon.spy();
+    const warnSpy = sinon.spy();
     op.initialize({
       logManager: {
         info: infoSpy,
-        warning: warningSpy,
+        warn: warnSpy,
       },
     }, {});
     op.process({
@@ -189,7 +189,7 @@ describe('orsa js build plugin', () => {
       },
     }, () => {
       expect(infoSpy).to.be.called;
-      expect(warningSpy).to.be.called;
+      expect(warnSpy).to.be.called;
     });
   });
 });

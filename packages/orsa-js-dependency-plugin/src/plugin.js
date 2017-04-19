@@ -26,7 +26,7 @@ class OrsaJsDependencyPlugin extends ProjectListener {
   process(project, cb) {
     const dependencies = project.metadata.get('js.packageJSON').dependencies || {};
     const devDependencies = project.metadata.get('js.packageJSON').devDependencies || {};
-    const packages = {};
+    const packages = [];
 
     this.options.glob.sync('./node_modules/*/package.json', {
       cwd: project.localPath,
@@ -36,7 +36,7 @@ class OrsaJsDependencyPlugin extends ProjectListener {
         const pkg = JSON.parse(
           this.options.fs.readFileSync(packagePath).toString()
         );
-        let type = 'indirect';
+        let type = null;
         let requestedVersion = null;
         if (dependencies[pkg.name]) {
           type = 'direct';
@@ -46,13 +46,19 @@ class OrsaJsDependencyPlugin extends ProjectListener {
           requestedVersion = devDependencies[pkg.name];
         }
 
-        packages[pkg.name] = {
+        const info = {
+          name: pkg.name,
           version: pkg.version,
-          type,
-          requestedVersion,
         };
+        if (requestedVersion) {
+          info.requestedVersion = requestedVersion;
+        }
+        if (type) {
+          info.type = type;
+        }
+        packages.push(info);
       } catch (e) {
-        this.orsa.logManager.warning(`Could not parse ${packagePath}`);
+        this.orsa.logManager.warn(`Could not parse ${packagePath}`);
       }
     });
     project.metadata.set('js.modules', packages);

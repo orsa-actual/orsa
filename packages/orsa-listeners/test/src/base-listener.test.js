@@ -31,12 +31,12 @@ describe('orsa base listener', () => {
     op.addTask('foozbaz', () => {});
   });
 
-  it('should log error/warning/info', () => {
+  it('should log error/warn/info', () => {
     const op = new BaseListener();
     op.initialize({
       logManager: {
         warn: (text) => {
-          expect(text).to.eql('BaseListener: warning');
+          expect(text).to.eql('BaseListener: warn');
         },
         info: (text) => {
           expect(text).to.eql('BaseListener: info');
@@ -46,7 +46,7 @@ describe('orsa base listener', () => {
         },
       },
     });
-    op.logWarn('warning');
+    op.logWarn('warn');
     op.logInfo('info');
     op.logError('error');
   });

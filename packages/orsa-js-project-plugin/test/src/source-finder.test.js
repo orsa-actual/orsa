@@ -170,7 +170,7 @@ describe('orsa js source finder plugin', () => {
     op.initialize({
       emit: () => {},
       logManager: {
-        warning: (t1) => {
+        warn: (t1) => {
           expect(t1).to.eql('Unable to parse foo');
         },
       },
