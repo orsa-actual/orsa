@@ -110,7 +110,7 @@ describe('orsa tester', () => {
     });
     oc.run(() => {
       expect(oc.children.find({
-        name: 'project1',
+        name: 'orsa-test-fixtures-project1',
       })[0].metadata.get('projectType')).to.eql('node');
       done();
     });
@@ -130,7 +130,7 @@ describe('orsa tester', () => {
     oc.run(() => {
       const project1 = oc.children.find({
         type: Project.TYPE,
-        name: 'project1',
+        name: 'orsa-test-fixtures-project1',
       })[0];
       const indexFile = project1.children.find({
         type: File.TYPE,
