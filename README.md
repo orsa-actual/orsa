@@ -2,7 +2,10 @@
 
 # Orsa
 
-<a href="https://travis-ci.org/orsa-actual/orsa"><img alt="Travis Status" src="https://img.shields.io/travis/orsa-actual/orsa/master.svg?label=travis"></a> <img alt="MIT License" src="https://img.shields.io/packagist/l/doctrine/orm.svg">
+<a href="https://travis-ci.org/orsa-actual/orsa"><img alt="Travis Status" src="https://img.shields.io/travis/orsa-actual/orsa/master.svg?label=travis"></a>
+<img alt="MIT License" src="https://img.shields.io/packagist/l/doctrine/orm.svg">
+<a href="https://circleci.com/gh/orsa-actual/orsa"><img alt="CircleCI Status" src="https://img.shields.io/circleci/project/github/orsa-actual/orsa/master.svg?label=circle"></a>
+<a href="https://codecov.io/github/orsa-actual/orsa"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/orsa-actual/orsa/master.svg"></a>
 
 Orsa is a system for monitoring a set of software projects. An easy way to think of it is like the code intelligence system that's built into an IDE, but headless and queryable so that you can get access to every thing it finds. It's also [pluggable](https://github.com/orsa-actual/orsa/blob/master/docs/plugins.md)), so if it doesn't get the data you need then you can easily add more scanners, indexers, summarizers or rules.
 

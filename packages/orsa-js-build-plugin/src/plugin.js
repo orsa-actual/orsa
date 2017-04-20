@@ -32,13 +32,13 @@ class OrsaJsBuildPlugin extends ProjectListener {
       (error, stdout, stderr) => {
         if (error) {
           this.orsa.logManager.warn(`${project.name} Project build failed`);
-          project.metadata.set('node.build.stdout', stdout);
-          project.metadata.set('node.build.stderr', stderr);
+          project.metadata.set('js.build.stdout', stdout);
+          project.metadata.set('js.build.stderr', stderr);
           cb(error);
         } else {
           this.orsa.logManager.info(`${project.name} Project build complete`);
-          project.metadata.set('node.build.stdout', stdout);
-          project.metadata.set('node.build.stderr', stderr);
+          project.metadata.set('js.build.stdout', stdout);
+          project.metadata.set('js.build.stderr', stderr);
           cb(null);
         }
       });
@@ -52,13 +52,13 @@ class OrsaJsBuildPlugin extends ProjectListener {
       (error, stdout, stderr) => {
         if (error) {
           this.orsa.logManager.warn(`${project.name} Project test failed`);
-          project.metadata.set('node.test.stdout', stdout);
-          project.metadata.set('node.test.stderr', stderr);
+          project.metadata.set('js.test.stdout', stdout);
+          project.metadata.set('js.test.stderr', stderr);
           cb(error);
         } else {
           this.orsa.logManager.info(`${project.name} Project test complete`);
-          project.metadata.set('node.test.stdout', stdout);
-          project.metadata.set('node.test.stderr', stderr);
+          project.metadata.set('js.test.stdout', stdout);
+          project.metadata.set('js.test.stderr', stderr);
           cb(null);
         }
       });

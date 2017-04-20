@@ -111,13 +111,23 @@ describe('orsa js build plugin', () => {
       },
     }, {});
     op.process({
+      version: '0.0.1',
       metadata: {
         set: (key, value) => {
-          if (key === 'node.build.stdout') {
+          if (key === 'js.build.stdout') {
             expect(value).to.eql('foo');
-          }
-          if (key === 'node.build.stderr') {
+          } else if (key === 'js.build.stderr') {
             expect(value).to.eql('bar');
+          } else if (key === 'js.modules') {
+            expect(value).to.be.null;
+          } else if (key === 'js.test.stdout') {
+            expect(value).to.eql('foo');
+          } else if (key === 'js.test.stderr') {
+            expect(value).to.eql('bar');
+          } else if (key === 'builtVersion') {
+            expect(value).to.eql('0.0.1');
+          } else {
+            expect(false).to.be.true;
           }
         },
       },
@@ -147,11 +157,14 @@ describe('orsa js build plugin', () => {
     op.process({
       metadata: {
         set: (key, value) => {
-          if (key === 'node.build.stdout') {
+          if (key === 'js.build.stdout') {
             expect(value).to.eql('foo');
-          }
-          if (key === 'node.build.stderr') {
+          } else if (key === 'js.build.stderr') {
             expect(value).to.eql('bar');
+          } else if (key === 'js.modules') {
+            expect(value).to.be.null;
+          } else {
+            expect(false).to.be.true;
           }
         },
       },
@@ -179,11 +192,21 @@ describe('orsa js build plugin', () => {
     op.process({
       metadata: {
         set: (key, value) => {
-          if (key === 'node.build.stdout') {
+          if (key === 'js.build.stdout') {
             expect(value).to.eql('foo');
-          }
-          if (key === 'node.build.stderr') {
+          } else if (key === 'js.build.stderr') {
             expect(value).to.eql('bar');
+          } else if (key === 'js.modules') {
+            expect(value).to.be.null;
+          } else if (key === 'js.test.stdout') {
+            expect(value).to.eql('foo');
+          } else if (key === 'js.test.stderr') {
+            expect(value).to.eql('bar');
+          }  else if (key === 'builtVersion') {
+            expect(value).to.be.undefined;
+          } else {
+            console.log(key);
+            expect(false).to.be.true;
           }
         },
       },
