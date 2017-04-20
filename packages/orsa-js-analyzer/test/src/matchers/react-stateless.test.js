@@ -15,7 +15,7 @@ describe('react-stateless', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(stateless1), [
       statelessMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 5,
         start: 2,
@@ -38,6 +38,6 @@ describe('react-stateless', () => {
   it('should not find regular functions', () => {
     expect(runner(parseJS(nonStateless1), [
       statelessMatcher,
-    ])).to.eql([]);
+    ]).features).to.eql([]);
   });
 });

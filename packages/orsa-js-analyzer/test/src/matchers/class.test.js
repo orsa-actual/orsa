@@ -42,7 +42,7 @@ describe('class matcher', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(reactExample1), [
       classMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 7,
         start: 1,
@@ -77,7 +77,7 @@ describe('class matcher', () => {
   it('should find MyComponent with extras', () => {
     const found = runner(parseJS(reactExample2), [
       classMatcher,
-    ]);
+    ]).features;
     expect(found).to.eql([
       {
         end: 15,
@@ -163,7 +163,7 @@ describe('class matcher', () => {
   it('should find a non-react class', () => {
     expect(runner(parseJS(nonReactClass), [
       classMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 6,
         start: 2,

@@ -23,7 +23,7 @@ describe('require-import', () => {
   it('should find a require', () => {
     expect(runner(parseJS(require1), [
       requireMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 2,
         start: 2,
@@ -39,7 +39,7 @@ describe('require-import', () => {
   it('should find a destructured require', () => {
     expect(runner(parseJS(require2), [
       requireMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 2,
         start: 2,
@@ -55,13 +55,13 @@ describe('require-import', () => {
   it('should not find other functions', () => {
     expect(runner(parseJS(nonRequire), [
       requireMatcher,
-    ])).to.eql([]);
+    ]).features).to.eql([]);
   });
 
   it('should not find a require with no variable set', () => {
     expect(runner(parseJS(noVariableRequire), [
       requireMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 2,
         start: 2,

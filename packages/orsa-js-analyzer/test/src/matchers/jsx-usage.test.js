@@ -25,7 +25,7 @@ describe('jsx-usage', () => {
   it('should find a component usage', () => {
     expect(runner(parseJS(usage1), [
       jsxUsageMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 7,
         start: 5,
@@ -42,7 +42,7 @@ describe('jsx-usage', () => {
   it('should find a component usage with a base', () => {
     expect(runner(parseJS(usage2), [
       jsxUsageMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 7,
         start: 5,

@@ -1,8 +1,10 @@
 /* eslint consistent-return: 0 */
 const expect = require('chai').expect;
-const Plugin = require('../../src/plugin');
-const File = require('orsa-dom').File;
 const astParser = require('orsa-ast-parser');
+const sinon = require('sinon');
+const File = require('orsa-dom').File;
+
+const Plugin = require('../../src/plugin');
 
 const jsSample = `
 require('crazy');
@@ -64,6 +66,26 @@ c`
     const op = new Plugin();
     const fe = createElement(jsSample);
     expect(op.shouldProcess(fe)).to.be.true;
+  });
+
+  it('should handle errors', () => {
+    const op = new Plugin({
+      runner: () => ({
+        features: [],
+        errors: [
+          'foo',
+        ],
+      }),
+    });
+    const fe = createElement(jsSample);
+    const spy = sinon.spy();
+    op.initialize({
+      logManager: {
+        warn: spy,
+      },
+    });
+    op.process(fe, () => {});
+    expect(spy).to.be.called;
   });
 
   it('should handle simple files', () => {

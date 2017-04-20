@@ -21,7 +21,7 @@ describe('react-create-class', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(createClass1), [
       createClassMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 8,
         start: 2,
@@ -40,6 +40,6 @@ describe('react-create-class', () => {
   it('should not find regular functions', () => {
     expect(runner(parseJS(notReactCreateClass), [
       createClassMatcher,
-    ])).to.eql([]);
+    ]).features).to.eql([]);
   });
 });

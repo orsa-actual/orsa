@@ -2,6 +2,7 @@
   no-empty: 0, no-confusing-arrow: 0 */
 
 const FileListener = require('orsa-listeners').FileListener;
+const assign = require('lodash.assign');
 
 const {
   runner,
@@ -14,6 +15,12 @@ const snipppetExtractor = (lines, start, end) =>
     lines.slice(start - 1, end).join("\n") : '';
 
 class OrsaJsLanguagePlugin extends FileListener {
+  constructor(options) {
+    super();
+    this.options = assign({
+      runner,
+    }, options);
+  }
   shouldProcess(domElement) {
     return domElement.metadata.get('js.ast') &&
       domElement.metadata.get('js.lines') &&
@@ -21,13 +28,19 @@ class OrsaJsLanguagePlugin extends FileListener {
   }
 
   process(domElement, cb) {
-    const features = runner(
+    const found = this.options.runner(
       domElement.metadata.get('js.ast'),
       allMatchers
     );
 
+    if (found.errors.length > 0) {
+      this.orsa.logManager.warn(
+        `${found.errors.length} errors while analyzing: ${domElement.name}`
+      );
+    }
+
     const lines = domElement.metadata.get('js.lines');
-    visit(features, (node) => {
+    visit(found.features, (node) => {
       node.snippet = snipppetExtractor(
         lines,
         node.start,
@@ -35,7 +48,7 @@ class OrsaJsLanguagePlugin extends FileListener {
       );
     });
 
-    domElement.metadata.set('js.features', features);
+    domElement.metadata.set('js.features', found.features);
 
     cb();
   }

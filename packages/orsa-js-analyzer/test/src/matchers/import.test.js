@@ -19,7 +19,7 @@ describe('import', () => {
   it('should find imports with one key', () => {
     expect(runner(parseJS(import1), [
       importMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 2,
         from: 'bar',
@@ -35,7 +35,7 @@ describe('import', () => {
   it('should find imports with one key and destructured', () => {
     expect(runner(parseJS(import2), [
       importMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 2,
         from: 'bar',
@@ -52,7 +52,7 @@ describe('import', () => {
   it('should find imports with one destructured', () => {
     expect(runner(parseJS(import3), [
       importMatcher,
-    ])).to.eql([
+    ]).features).to.eql([
       {
         end: 2,
         from: 'bar',
