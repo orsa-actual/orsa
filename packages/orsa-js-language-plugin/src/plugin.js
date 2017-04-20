@@ -3,12 +3,15 @@
 
 const FileListener = require('orsa-listeners').FileListener;
 const assign = require('lodash.assign');
+const flatten = require('lodash.flatten');
 
 const {
   runner,
   allMatchers,
   visit,
 } = require('orsa-js-analyzer');
+
+const NAME = 'orsa-js-language-plugin';
 
 const snipppetExtractor = (lines, start, end) =>
   (lines && start < lines.length) ?
@@ -28,9 +31,22 @@ class OrsaJsLanguagePlugin extends FileListener {
   }
 
   process(domElement, cb) {
+    let matchers = allMatchers;
+    if (this.config[NAME]) {
+      if (this.config[NAME].disableStandardMatachers) {
+        matchers = [];
+      }
+      if (this.config[NAME].matchers) {
+        matchers = flatten([
+          this.config[NAME].matchers,
+          matchers,
+        ]);
+      }
+    }
+
     const found = this.options.runner(
       domElement.metadata.get('js.ast'),
-      allMatchers
+      matchers
     );
 
     if (found.errors.length > 0) {

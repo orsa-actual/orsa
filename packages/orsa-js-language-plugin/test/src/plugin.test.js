@@ -83,7 +83,7 @@ c`
       logManager: {
         warn: spy,
       },
-    });
+    }, {});
     op.process(fe, () => {});
     expect(spy).to.be.called;
   });
@@ -104,5 +104,35 @@ c`
         fe.metadata.get('js.features')[0].snippet.match(/require/)
       ).to.not.be.null;
     });
+  });
+
+  it('should disable standard matchers', () => {
+    const op = new Plugin();
+    const fe = createElement(jsSample);
+    op.initialize({}, {
+      'orsa-js-language-plugin': {
+        disableStandardMatachers: true,
+      },
+    });
+    op.process(fe, () => {
+      expect(fe.metadata.get('js.features')).to.eql([]);
+    });
+  });
+
+  it('should handle custom matchers', () => {
+    const op = new Plugin();
+    const fe = createElement(jsSample);
+    const spy = sinon.spy();
+    op.initialize({}, {
+      'orsa-js-language-plugin': {
+        matchers: [
+          spy,
+        ],
+      },
+    });
+    op.process(fe, () => {
+      expect(fe.metadata.get('js.features').length).to.eql(1);
+    });
+    expect(spy).to.be.called;
   });
 });

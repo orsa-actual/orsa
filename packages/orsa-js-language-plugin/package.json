@@ -12,11 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "babel-traverse": "^6.24.1",
-    "babel-types": "^6.24.1",
-    "doctrine": "^2.0.0",
     "lodash.assign": "^4.2.0",
-    "lodash.get": "^4.4.2",
-    "lodash.keys": "^4.2.0",
+    "lodash.flatten": "^4.4.0",
     "orsa-ast-parser": "^0.0.3",
     "orsa-dom": "^0.0.3",
     "orsa-js-analyzer": "^0.0.3",
