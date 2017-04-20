@@ -34,6 +34,10 @@ class Foo extends AnotherThing {
 
 describe('javascript ast parsing', () => {
   it('should parse js', () => {
+    expect(astParser(null)).to.be.null;
+  });
+
+  it('should parse js', () => {
     expect(astParser('crazy-train', {
       fs: {
         readFileSync: () => jsSample,

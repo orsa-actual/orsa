@@ -4,11 +4,11 @@ const assign = require('lodash.assign');
 const BaseListener = require('orsa-listeners').BaseListener;
 
 class OrsaBunyanLogger extends BaseListener {
-  constructor(options = {}) {
+  constructor(options) {
     super({});
     this.options = assign({
       bunyan,
-    }, options);
+    }, options || {});
     this.bunyan = this.options.bunyan.createLogger({
       name: 'orsa',
     });

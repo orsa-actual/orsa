@@ -5,6 +5,9 @@ const traverse = require('babel-traverse').default;
 const astParser = (fileName, options = {
   fs,
 }) => {
+  if (!fileName) {
+    return null;
+  }
   const fileText = options.fs.readFileSync(fileName).toString();
   let error = null;
   const lines = fileText.split(/[\n|\r\n]/);
