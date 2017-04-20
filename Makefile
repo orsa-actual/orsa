@@ -18,3 +18,8 @@ bootstrap:
 	make clean
 	npm i
 	./node_modules/.bin/lerna bootstrap
+
+test-ci-coverage:
+	BABEL_ENV=cov make bootstrap
+	./scripts/test-cov.sh
+	./node_modules/.bin/codecov -f coverage/coverage-final.json

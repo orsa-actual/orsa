@@ -10,15 +10,16 @@
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^2.0.0-rc.1"
-  },
-  "dependencies": {
+    "codecov": "^2.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "lerna": "^2.0.0-rc.1",
     "mocha": "^3.2.0",
     "nyc": "^10.2.0"
+  },
+  "dependencies": {
   }
 }
