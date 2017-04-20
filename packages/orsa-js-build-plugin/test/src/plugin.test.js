@@ -202,10 +202,9 @@ describe('orsa js build plugin', () => {
             expect(value).to.eql('foo');
           } else if (key === 'js.test.stderr') {
             expect(value).to.eql('bar');
-          }  else if (key === 'builtVersion') {
+          } else if (key === 'builtVersion') {
             expect(value).to.be.undefined;
           } else {
-            console.log(key);
             expect(false).to.be.true;
           }
         },
