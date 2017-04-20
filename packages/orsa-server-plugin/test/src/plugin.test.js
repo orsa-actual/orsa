@@ -1,3 +1,4 @@
+/* eslint no-lonely-if: 0, no-loop-func: 0 */
 const expect = require('chai').expect;
 
 const {
@@ -9,27 +10,62 @@ const Plugin = require('../../src/plugin');
 
 describe('orsa js build plugin', () => {
   it('should run successfully', () => {
-    const successCBs = [];
+    let successCB = null;
 
     const onBlock = {};
     onBlock.on = (evtName, pcb) => {
       if (evtName === 'response') {
-        successCBs.push(pcb);
+        successCB = pcb;
       }
       return onBlock;
     };
 
+    const order = [];
     const op = new Plugin({
+      uuidV4: () => 'foo',
       request: {
         post(url, data) {
           expect(url).to.eql('http://localhost:3000/api/update');
           expect(data.json).to.be.true;
-          if (data.body.type === File.TYPE) {
-            expect(data.body.name).to.eql('fe1-foo');
-            expect(data.body.project).to.eql('project-foo');
-          }
-          if (data.body.type === Project.TYPE) {
-            expect(data.body.name).to.eql('project-foo');
+          if (data.body.signal !== undefined) {
+            order.push(data.body.signal);
+            if (data.body.signal === 'startRun') {
+              expect(data.body).to.eql({
+                signal: 'startRun',
+                runID: 'foo',
+                name: undefined,
+              });
+            } else if (data.body.signal === 'endRun') {
+              expect(data.body).to.eql({
+                signal: 'endRun',
+                runID: 'foo',
+                name: undefined,
+              });
+            } else if (data.body.signal === 'beforeProject') {
+              expect(data.body).to.eql({
+                signal: 'beforeProject',
+                runID: 'foo',
+                name: 'project-foo',
+              });
+            } else if (data.body.signal === 'afterProject') {
+              expect(data.body).to.eql({
+                signal: 'afterProject',
+                runID: 'foo',
+                name: 'project-foo',
+              });
+            } else {
+              expect(false).to.be.true;
+            }
+          } else {
+            order.push(`${data.body.type}:${data.body.name}`);
+            if (data.body.type === File.TYPE) {
+              expect(data.body.name).to.eql('fe1-foo');
+              expect(data.body.project).to.eql('project-foo');
+            } else if (data.body.type === Project.TYPE) {
+              expect(data.body.name).to.eql('project-foo');
+            } else {
+              expect(false).to.be.true;
+            }
           }
           return onBlock;
         },
@@ -71,9 +107,24 @@ describe('orsa js build plugin', () => {
     });
 
     op.shutdown(() => {});
-    processCB(() => {});
+    processCB(() => {
+      successCB = null;
+      expect(order).to.eql([
+        'startRun',
+        'beforeProject',
+        'Project:project-foo',
+        'File:fe1-foo',
+        'afterProject',
+        'endRun',
+      ]);
+    });
 
-    successCBs.forEach(cb => cb());
+    while (successCB) {
+      successCB((cb) => {
+        successCB = null;
+        cb();
+      });
+    }
   });
 
   it('should handle errors', () => {
