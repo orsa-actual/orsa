@@ -1,8 +1,8 @@
 {
-  "name": "orsa-js-language-plugin",
+  "name": "orsa-js-analyzer",
   "version": "0.0.3",
-  "description": "Orsa plugin for Javascript language parsing",
-  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-language-plugin",
+  "description": "Orsa independent Javascript analyzer",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-analyzer",
   "main": "index.js",
   "scripts": {
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",
@@ -14,14 +14,13 @@
     "babel-traverse": "^6.24.1",
     "babel-types": "^6.24.1",
     "doctrine": "^2.0.0",
+    "lodash.flatten": "^4.4.0",
     "lodash.get": "^4.4.2",
     "lodash.keys": "^4.2.0",
-    "orsa-ast-parser": "^0.0.3",
-    "orsa-js-analyzer": "^0.0.3",
-    "orsa-dom": "^0.0.3",
-    "orsa-listeners": "^0.0.3"
+    "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "orsa-ast-parser": "^0.0.3",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",

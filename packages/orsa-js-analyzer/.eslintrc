@@ -1,0 +1,19 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "import/no-extraneous-dependencies": ["error",
+      {
+        "devDependencies": ["**/*.test.js", "**/*.spec.js"],
+        "optionalDependencies": ["**/*.test.js", "**/*.spec.js"],
+        "peerDependencies": ["**/*.test.js", "**/*.spec.js"]
+      }
+    ],
+    "comma-dangle": ["error", {
+      "arrays": "always",
+      "objects": "always",
+      "imports": "always",
+      "exports": "always",
+      "functions": "ignore",
+    }]
+  }
+}
