@@ -41,6 +41,7 @@ module.exports = (opts) => {
       require('orsa-js-language-plugin'),
       require('orsa-js-build-plugin'),
       require('orsa-js-dependency-plugin'),
+      require('orsa-js-react-docgen-plugin'),
       require('orsa-logger-bunyan-plugin'),
       require('orsa-server-plugin'),
     ],

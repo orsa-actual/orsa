@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class MyComponent extends React.Component {
   render() {
@@ -9,3 +10,11 @@ export default class MyComponent extends React.Component {
     );
   }
 }
+
+MyComponent.propTypes = {
+  title: PropTypes.string,
+};
+
+MyComponent.defaultProps = {
+  title: "foo!",
+};
