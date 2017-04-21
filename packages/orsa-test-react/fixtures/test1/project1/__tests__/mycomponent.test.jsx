@@ -6,9 +6,9 @@ import MyComponent from '../src/mycomponent';
 
 test('MyComponent outputs something', () => {
   const component = renderer.create(
-    <MyComponent>Facebook</MyComponent>
+    <MyComponent />
   );
   const tree = component.toJSON();
   expect(tree.type).toEqual('div');
-  expect(tree.children[0]).toEqual('Hi there!');
+  expect(tree.children[0]).toEqual('That\'s a nice bike.');
 });

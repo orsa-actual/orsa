@@ -8,7 +8,7 @@ export default class MySuperComponent extends React.Component {
       <div>
         <MyComponent title="foo" />
         <MyParentComponent enabled />
-        Hi there!
+        Bear hugs are what he gives bears
       </div>
     );
   }

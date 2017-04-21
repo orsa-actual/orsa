@@ -43,6 +43,7 @@ class OrsaNodeProjectPluginPackageFinder extends ProjectListener {
           domElement.metadata.set('js.packageJSON', pkg, {
             temporary: true,
           });
+          domElement.metadata.set('js.packageJSONText', JSON.stringify(pkg));
           domElement.metadata.set('projectType', 'node');
         }
       }

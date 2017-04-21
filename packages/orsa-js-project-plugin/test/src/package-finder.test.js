@@ -94,6 +94,8 @@ describe('orsa js project plugin', () => {
           } else if (key === 'js.packageJSON') {
             expect(value).to.not.be.null;
             expect(options.temporary).to.be.true;
+          } else if (key === 'js.packageJSONText') {
+            expect(value).to.be.a.string;
           } else {
             expect(false).to.be.true;
           }
@@ -136,6 +138,8 @@ describe('orsa js project plugin', () => {
             expect(value).to.eql({
               version: '0.0.2',
             });
+          } else if (key === 'js.packageJSONText') {
+            expect(value).to.be.a.string;
           } else {
             expect(false).to.be.true;
           }

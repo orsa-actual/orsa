@@ -12,6 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "lodash.assign": "^4.2.0",
+    "lodash.keys": "^4.2.0",
+    "lodash.merge": "^4.6.0",
     "orsa-dom": "^0.0.3",
     "orsa-listeners": "^0.0.3",
     "react-docgen": "^2.14.1"

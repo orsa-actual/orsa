@@ -19,6 +19,32 @@ export default class MyComponent extends React.Component {
 }
 `;
 
+const reactSampleWithProps = `
+import React from 'react';
+
+/**
+Foo
+*/
+export default class MyComponent extends React.Component {
+  render() {
+    return (
+      <div />
+    );
+  }
+}
+
+MyComponent.propTypes = {
+  title: PropTypes.string,
+  enabled: PropTypes.boolean,
+};
+
+MyComponent.defaultProps = {
+  title: 'Hi!',
+  enabled: false,
+};
+`;
+
+
 const noReactSample = `
 export () => true;
 `;
@@ -50,6 +76,23 @@ describe('orsa react-docgen plugin', () => {
     fe.localPath = 'foo';
     op.process(fe, () => {
       expect(fe.metadata.get('js.docgen').description).to.eql('Foo');
+    });
+  });
+
+  it('should handle sucess', () => {
+    const op = new Plugin({
+      fs: {
+        readFileSync: (path) => {
+          expect(path).to.eql('foo');
+          return reactSampleWithProps;
+        },
+      },
+    });
+    const fe = new File();
+    fe.localPath = 'foo';
+    op.process(fe, () => {
+      expect(fe.metadata.get('js.docgen').description).to.eql('Foo');
+      expect(fe.metadata.get('js.docgen').props[0].name).to.eql('title');
     });
   });
 

@@ -6,9 +6,9 @@ import Simple from '../src/simple';
 
 test('Simple outputs something', () => {
   const component = renderer.create(
-    <Simple>Facebook</Simple>
+    <Simple />
   );
   const tree = component.toJSON();
   expect(tree.type).toEqual('div');
-  expect(tree.children[0]).toEqual('Hi there!');
+  expect(tree.children[0]).toEqual('He once won a staring contest with his own reflection');
 });

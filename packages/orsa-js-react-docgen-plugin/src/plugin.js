@@ -4,6 +4,8 @@ const FileListener = require('orsa-listeners').FileListener;
 const assign = require('lodash.assign');
 const fs = require('fs');
 const docGen = require('react-docgen');
+const keys = require('lodash.keys');
+const merge = require('lodash.merge');
 
 class OrsaJSReactDocgenPlugin extends FileListener {
   constructor(options) {
@@ -28,6 +30,21 @@ class OrsaJSReactDocgenPlugin extends FileListener {
       let output = null;
       try {
         output = docGen.parse(jsText);
+
+        /*
+        Docgen uses the user generated param names as keys on `props` and
+        while that's convenient it screws up downstream systems. So we'll
+        coerce that into an array and turn the key into `name`.
+        */
+        if (output && output.props) {
+          const newProps = [];
+          keys(output.props).forEach((name) => {
+            newProps.push(merge(output.props[name], {
+              name,
+            }));
+          });
+          output.props = newProps;
+        }
       } catch (e) {
         // Not all files, even in a React project, will be React, so
         // this is not a big deal.

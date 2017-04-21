@@ -6,7 +6,7 @@ export default class MyParentComponent extends React.Component {
     return (
       <div>
         <MyComponent title="foo" />
-        Hi there!
+        He once started a fire using only dental floss and water
       </div>
     );
   }

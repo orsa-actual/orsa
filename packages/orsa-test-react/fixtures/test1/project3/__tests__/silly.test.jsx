@@ -6,9 +6,9 @@ import Silly from '../src/silly';
 
 test('Silly outputs something', () => {
   const component = renderer.create(
-    <Silly>Facebook</Silly>
+    <Silly />
   );
   const tree = component.toJSON();
   expect(tree.type).toEqual('strong');
-  expect(tree.children[0]).toEqual('Hi there!');
+  expect(tree.children[0]).toEqual('His ten gallon hat holds twenty gallons');
 });
