@@ -19,7 +19,7 @@ export default class MyComponent extends React.Component {
   render() {
     return (
       <div>
-        That's a nice bike.
+        What is best in life?
       </div>
     );
   }

@@ -10,5 +10,5 @@ test('MyComponent outputs something', () => {
   );
   const tree = component.toJSON();
   expect(tree.type).toEqual('div');
-  expect(tree.children[0]).toEqual('That\'s a nice bike.');
+  expect(tree.children[0]).toEqual('What is best in life?');
 });
