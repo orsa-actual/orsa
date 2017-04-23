@@ -30,6 +30,8 @@ Orsa is written in Javascript so we have [extensive support for it](https://gith
 
 Command line is great, but what you really want is a Web UI, we have that too in [orsa-server](https://github.com/orsa-actual/orsa-server)! And even better, it's not just a web UI, it's also a [GraphQL server](http://graphql.org/). So you can write your own apps against the GraphQL endpoint.
 
+Once you have an [orsa-server](https://github.com/orsa-actual/orsa-server) running you can connect to it in Slack using the [orsabot](https://github.com/orsa-actual/orsabot).
+
 ## Staying in contact
 
 First, thanks for your interest in Orsa. It's awesome! We really wan't you to use it, get value out of it, love it, and contribute to it (in that order). And if you have problems along the way, or just want to talk, join us in [Slack](https://orsa-actual.slack.com).
