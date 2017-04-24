@@ -8,7 +8,7 @@
     "test": "mocha && istanbul cover _mocha -- --recursive && npm run lint",
     "lint": "eslint index.js src/**/*.js test/**/*.js",
     "orsa": "orsa --output ./fixtures/test1.json --path ./fixtures/test1 | bunyan -o short",
-    "orsa-to-server": "orsa --server http://localhost:3000/api/update --path ./fixtures/test1 | bunyan -o short"
+    "orsa-to-server": "orsa --server http://localhost:3000/methods/update --path ./fixtures/test1 | bunyan -o short"
   },
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
