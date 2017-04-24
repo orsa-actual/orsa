@@ -26,6 +26,6 @@ test-ci-coverage:
 
 publish:
 	git pull --rebase
-  make test
-  ./node_modules/.bin/lerna publish --npm-tag=next --exact --skip-temp-tag
-  make clean
+	make test
+	./node_modules/.bin/lerna publish --npm-tag=next --exact --skip-temp-tag
+	make clean
