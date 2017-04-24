@@ -23,3 +23,9 @@ test-ci-coverage:
 	BABEL_ENV=cov make bootstrap
 	./scripts/test-cov.sh
 	./node_modules/.bin/codecov -f coverage/coverage-final.json
+
+publish:
+	git pull --rebase
+  make test
+  ./node_modules/.bin/lerna publish --npm-tag=next --exact --skip-temp-tag
+  make clean

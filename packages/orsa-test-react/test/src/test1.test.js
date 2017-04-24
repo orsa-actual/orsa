@@ -21,9 +21,9 @@ describe('orsa tester', () => {
     oc.run(() => {
       expect(oc.children.toArray().length).to.eql(4);
       const names = oc.children.toArray().map(p => p.name);
-      expect(includes(names, 'project1')).to.be.true;
-      expect(includes(names, 'project2')).to.be.true;
-      expect(includes(names, 'project3')).to.be.true;
+      expect(includes(names, 'components')).to.be.true;
+      expect(includes(names, 'login-form')).to.be.true;
+      expect(includes(names, 'checkout-app')).to.be.true;
       done();
     });
   });
@@ -40,16 +40,16 @@ describe('orsa tester', () => {
     oc.run(() => {
       expect(oc.children.toArray().length).to.eql(4);
       const names = oc.children.toArray().map(p => p.name);
-      expect(includes(names, 'project1')).to.be.true;
-      expect(includes(names, 'project2')).to.be.true;
-      expect(includes(names, 'project3')).to.be.true;
+      expect(includes(names, 'components')).to.be.true;
+      expect(includes(names, 'login-form')).to.be.true;
+      expect(includes(names, 'checkout-app')).to.be.true;
     });
     oc.run(() => {
       expect(oc.children.toArray().length).to.eql(4);
       const names = oc.children.toArray().map(p => p.name);
-      expect(includes(names, 'project1')).to.be.true;
-      expect(includes(names, 'project2')).to.be.true;
-      expect(includes(names, 'project3')).to.be.true;
+      expect(includes(names, 'components')).to.be.true;
+      expect(includes(names, 'login-form')).to.be.true;
+      expect(includes(names, 'checkout-app')).to.be.true;
       done();
     });
   });
@@ -66,9 +66,9 @@ describe('orsa tester', () => {
     oc.run(() => {
       expect(oc.children.toArray().length).to.eql(4);
       const names = oc.children.toArray().map(p => p.name);
-      expect(includes(names, 'project1')).to.be.true;
-      expect(includes(names, 'project2')).to.be.true;
-      expect(includes(names, 'project3')).to.be.true;
+      expect(includes(names, 'components')).to.be.true;
+      expect(includes(names, 'login-form')).to.be.true;
+      expect(includes(names, 'checkout-app')).to.be.true;
     });
 
     // Save it
@@ -91,9 +91,9 @@ describe('orsa tester', () => {
     oc2.run(() => {
       expect(oc2.children.toArray().length).to.eql(4);
       const names = oc.children.toArray().map(p => p.name);
-      expect(includes(names, 'project1')).to.be.true;
-      expect(includes(names, 'project2')).to.be.true;
-      expect(includes(names, 'project3')).to.be.true;
+      expect(includes(names, 'components')).to.be.true;
+      expect(includes(names, 'login-form')).to.be.true;
+      expect(includes(names, 'checkout-app')).to.be.true;
       done();
     });
   });
@@ -110,7 +110,7 @@ describe('orsa tester', () => {
     });
     oc.run(() => {
       expect(oc.children.find({
-        name: 'orsa-test-fixtures-project1',
+        name: 'orsa-test1-login-form',
       })[0].metadata.get('projectType')).to.eql('node');
       done();
     });
@@ -130,11 +130,11 @@ describe('orsa tester', () => {
     oc.run(() => {
       const project1 = oc.children.find({
         type: Project.TYPE,
-        name: 'orsa-test-fixtures-project1',
+        name: 'orsa-test1-login-form',
       })[0];
       const indexFile = project1.children.find({
         type: File.TYPE,
-        name: 'index.js',
+        name: 'src/index.js',
       })[0];
       expect(indexFile).to.not.be.null;
       done();

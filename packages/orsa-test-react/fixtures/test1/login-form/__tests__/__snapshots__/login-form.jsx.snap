@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm outputs something 1`] = `
+<div
+  className="panel "
+>
+  <h1>
+    Login
+  </h1>
+  <div>
+    <form>
+      <div
+        className="form-field"
+      >
+        <div
+          className="field-title"
+        >
+          Username
+        </div>
+        <input
+          disabled={false}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-field"
+      >
+        <div
+          className="field-title"
+        >
+          Password
+        </div>
+        <input
+          disabled={false}
+          type="password"
+          value=""
+        />
+      </div>
+      <div>
+        <button
+          disabled={false}
+        >
+          foo!
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;

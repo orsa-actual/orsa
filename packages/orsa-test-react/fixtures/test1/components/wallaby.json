@@ -1,0 +1,16 @@
+{
+  "files": [
+    "src/**/*.js",
+    "index.js"
+  ],
+  "tests": [
+    "__tests__/**/*.js"
+  ],
+
+  "env": {
+    "type": "node",
+    "runner": "node"
+  },
+
+  "testFramework": "jest"
+}
