@@ -1,6 +1,6 @@
 {
   "name": "orsa-logger-bunyan-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa bunyan logger",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-logger-bunyan-plugin",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "dependencies": {
     "bunyan": "^1.8.10",
     "lodash.assign": "^4.2.0",
-    "orsa-listeners": "^0.0.3"
+    "orsa-listeners": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

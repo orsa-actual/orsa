@@ -1,6 +1,6 @@
 {
   "name": "orsa-ast-parser",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa AST parser",
   "main": "index.js",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-ast-parser",

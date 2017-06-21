@@ -1,6 +1,6 @@
 {
   "name": "orsa-core",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa system core",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-core",
   "main": "index.js",
@@ -16,7 +16,7 @@
     "lodash.flatten": "^4.4.0",
     "lodash.isarray": "^4.0.0",
     "lodash.values": "^4.3.0",
-    "orsa-dom": "^0.0.3"
+    "orsa-dom": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

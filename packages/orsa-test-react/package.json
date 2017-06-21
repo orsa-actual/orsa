@@ -1,6 +1,6 @@
 {
   "name": "orsa-test-react",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa test package",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-test-react",
   "main": "index.js",
@@ -14,14 +14,14 @@
   "license": "MIT",
   "dependencies": {
     "lodash.includes": "^4.3.0",
-    "orsa-cli": "^0.0.3",
-    "orsa-core": "^0.0.3",
-    "orsa-dom": "^0.0.3",
-    "orsa-js-build-plugin": "^0.0.3",
-    "orsa-js-dependency-plugin": "^0.0.3",
-    "orsa-js-language-plugin": "^0.0.3",
-    "orsa-js-project-plugin": "^0.0.3",
-    "orsa-project-fs-scanner-plugin": "^0.0.3"
+    "orsa-cli": "^0.0.1",
+    "orsa-core": "^0.0.1",
+    "orsa-dom": "^0.0.1",
+    "orsa-js-build-plugin": "^0.0.1",
+    "orsa-js-dependency-plugin": "^0.0.1",
+    "orsa-js-language-plugin": "^0.0.1",
+    "orsa-js-project-plugin": "^0.0.1",
+    "orsa-project-fs-scanner-plugin": "^0.0.1"
   },
   "devDependencies": {
     "bunyan": "^1.8.10",

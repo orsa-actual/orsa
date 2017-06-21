@@ -1,6 +1,6 @@
 {
   "name": "orsa-server-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa plugin to connect to the Orsa server",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-server-plugin",
   "main": "index.js",
@@ -15,8 +15,8 @@
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.0",
-    "orsa-dom": "^0.0.3",
-    "orsa-listeners": "^0.0.3",
+    "orsa-dom": "^0.0.1",
+    "orsa-listeners": "^0.0.1",
     "request": "^2.81.0",
     "uuid": "^3.0.1"
   },

@@ -1,6 +1,6 @@
 {
   "name": "orsa-js-dependency-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa plugin for Javascript project dependency scanning",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-dependency-plugin",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "glob": "^7.1.1",
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2",
-    "orsa-listeners": "^0.0.3"
+    "orsa-listeners": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

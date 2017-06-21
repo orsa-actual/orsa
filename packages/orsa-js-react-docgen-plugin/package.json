@@ -1,6 +1,6 @@
 {
   "name": "orsa-js-react-docgen-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa plugin integration for react-docgen",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-react-docgen-plugin",
   "main": "index.js",
@@ -14,8 +14,8 @@
     "lodash.assign": "^4.2.0",
     "lodash.keys": "^4.2.0",
     "lodash.merge": "^4.6.0",
-    "orsa-dom": "^0.0.3",
-    "orsa-listeners": "^0.0.3",
+    "orsa-dom": "^0.0.1",
+    "orsa-listeners": "^0.0.1",
     "react-docgen": "^2.14.1"
   },
   "devDependencies": {

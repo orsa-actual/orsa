@@ -1,6 +1,6 @@
 {
   "name": "orsa-js-language-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa plugin for Javascript language parsing",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-language-plugin",
   "main": "index.js",
@@ -14,10 +14,10 @@
     "babel-traverse": "^6.24.1",
     "lodash.assign": "^4.2.0",
     "lodash.flatten": "^4.4.0",
-    "orsa-ast-parser": "^0.0.3",
-    "orsa-dom": "^0.0.3",
-    "orsa-js-analyzer": "^0.0.3",
-    "orsa-listeners": "^0.0.3"
+    "orsa-ast-parser": "^0.0.1",
+    "orsa-dom": "^0.0.1",
+    "orsa-js-analyzer": "^0.0.1",
+    "orsa-listeners": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

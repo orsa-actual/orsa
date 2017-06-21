@@ -1,6 +1,6 @@
 {
   "name": "orsa-dom",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa DOM",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-dom",
   "main": "index.js",

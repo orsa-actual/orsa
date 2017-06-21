@@ -1,6 +1,6 @@
 {
   "name": "orsa-project-fs-scanner-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa file system based project scanner",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-project-fs-scanner-plugin",
   "main": "index.js",
@@ -12,8 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "lodash.assign": "^4.2.0",
-    "orsa-dom": "^0.0.3",
-    "orsa-listeners": "^0.0.3"
+    "orsa-dom": "^0.0.1",
+    "orsa-listeners": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

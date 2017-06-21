@@ -1,6 +1,6 @@
 {
   "name": "orsa-cli",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa command line interface",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-cli",
   "main": "index.js",
@@ -16,16 +16,16 @@
   "dependencies": {
     "commander": "^2.9.0",
     "lodash.assign": "^4.2.0",
-    "orsa-core": "^0.0.3",
-    "orsa-dom": "^0.0.3",
-    "orsa-logger-bunyan-plugin": "^0.0.3",
-    "orsa-js-build-plugin": "^0.0.3",
-    "orsa-js-dependency-plugin": "^0.0.3",
-    "orsa-js-language-plugin": "^0.0.3",
-    "orsa-js-project-plugin": "^0.0.3",
-    "orsa-js-react-docgen-plugin": "^0.0.3",
-    "orsa-project-fs-scanner-plugin": "^0.0.3",
-    "orsa-server-plugin": "^0.0.3"
+    "orsa-core": "^0.0.1",
+    "orsa-dom": "^0.0.1",
+    "orsa-js-build-plugin": "^0.0.1",
+    "orsa-js-dependency-plugin": "^0.0.1",
+    "orsa-js-language-plugin": "^0.0.1",
+    "orsa-js-project-plugin": "^0.0.1",
+    "orsa-js-react-docgen-plugin": "^0.0.1",
+    "orsa-logger-bunyan-plugin": "^0.0.1",
+    "orsa-project-fs-scanner-plugin": "^0.0.1",
+    "orsa-server-plugin": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

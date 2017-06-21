@@ -1,6 +1,6 @@
 {
   "name": "orsa-listeners",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa listener types",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-listeners",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "lodash.isfunction": "^3.0.8",
     "lodash.keys": "^4.2.0",
     "lodash.merge": "^4.6.0",
-    "orsa-dom": "^0.0.3"
+    "orsa-dom": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

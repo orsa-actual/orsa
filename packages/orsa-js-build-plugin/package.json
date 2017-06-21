@@ -1,6 +1,6 @@
 {
   "name": "orsa-js-build-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa plugin for Javascript project building",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-build-plugin",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "dependencies": {
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2",
-    "orsa-listeners": "^0.0.3"
+    "orsa-listeners": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

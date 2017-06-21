@@ -1,6 +1,6 @@
 {
   "name": "orsa-js-project-plugin",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Orsa plugin to support javascript projects",
   "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-js-project-plugin",
   "main": "index.js",
@@ -14,9 +14,9 @@
     "babylon": "^6.16.1",
     "glob": "^7.1.1",
     "lodash.assign": "^4.2.0",
-    "orsa-dom": "^0.0.3",
-    "orsa-ast-parser": "^0.0.3",
-    "orsa-listeners": "^0.0.3"
+    "orsa-ast-parser": "^0.0.1",
+    "orsa-dom": "^0.0.1",
+    "orsa-listeners": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
