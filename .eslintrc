@@ -13,7 +13,7 @@
       "objects": "always",
       "imports": "always",
       "exports": "always",
-      "functions": "ignore",
+      "functions": "ignore"
     }],
     "global-require": 0
   }

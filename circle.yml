@@ -1,8 +1,8 @@
 machine:
   node:
     version:
-      7
+      10
 
 test:
   override:
-    - make test-ci-coverage
+    - npm run test

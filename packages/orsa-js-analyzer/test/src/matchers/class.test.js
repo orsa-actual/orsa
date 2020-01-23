@@ -168,6 +168,7 @@ describe('class matcher', () => {
         end: 6,
         start: 2,
         type: 'class',
+        superClass: undefined,
         metadata: {
         },
         jsDoc: {

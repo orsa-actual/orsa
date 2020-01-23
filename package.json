@@ -3,23 +3,24 @@
   "private": true,
   "description": "Code analysis engine",
   "scripts": {
-    "test": "make bootstrap && make test && make lint",
-    "lint": "make lint",
-    "dev-setup": "make bootstrap"
+    "test": "lerna bootstrap && npm run test:unit && npm run test:lint",
+    "test:unit": "lerna exec -- npm run test",
+    "test:lint": "lerna exec -- npm run lint",
+    "dev-setup": "lerna bootstrap",
+    "publish": "lerna publish --npm-tag=next --exact --skip-temp-tag"
   },
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
   "devDependencies": {
-    "codecov": "^2.1.0",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
-    "lerna": "^2.0.0-rc.1",
-    "mocha": "^3.2.0",
-    "nyc": "^10.2.0"
-  },
-  "dependencies": {
+    "codecov": "^3.6.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "lerna": "^3.20.2",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0"
   }
 }
