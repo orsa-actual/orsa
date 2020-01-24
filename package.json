@@ -1,26 +1,40 @@
 {
   "name": "orsa",
-  "private": true,
-  "description": "Code analysis engine",
+  "version": "0.1.0",
+  "description": "Orsa command line interface",
+  "repository": "https://github.com/orsa-actual/orsa/tree/master/packages/orsa-cli",
+  "main": "src/index.js",
   "scripts": {
-    "test": "lerna bootstrap && npm run test:unit && npm run test:lint",
-    "test:unit": "lerna exec -- npm run test",
-    "test:lint": "lerna exec -- npm run lint",
-    "dev-setup": "lerna bootstrap",
-    "publish": "lerna publish --npm-tag=next --exact --skip-temp-tag"
+    "test": "npm run lint",
+    "lint": "eslint src/**/*.js"
+  },
+  "bin": {
+    "orsa": "./bin/orsa.js"
   },
   "author": "Jack Herrington <jherr@pobox.com>",
   "license": "MIT",
+  "dependencies": {
+    "apollo-server-express": "^2.9.16",
+    "babel-traverse": "^6.26.0",
+    "babylon": "^6.18.0",
+    "chalk": "^3.0.0",
+    "doctrine": "^3.0.0",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
+    "lodash.get": "^4.4.2",
+    "md5": "^2.2.1",
+    "react-docgen": "^5.1.0",
+    "rimraf": "^3.0.0",
+    "yargs": "^15.1.0"
+  },
   "devDependencies": {
-    "codecov": "^3.6.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
-    "lerna": "^3.20.2",
-    "mocha": "^7.0.0",
-    "nyc": "^15.0.0"
+    "eslint-plugin-react-hooks": "^2.3.0"
   }
 }
