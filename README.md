@@ -11,26 +11,25 @@ Orsa is a system for monitoring a set of software projects. An easy way to think
 
 As software projects grow in both code size and contributors, keeping track of it can be a problem. What node modules define the `Selector` React object? What modules will be effected when I make a change? Who uses the `inverted` attribute on the `Button` component? These questions, and more, are what Orsa was designed to answer.
 
-## How Does Orsa Work?
+## How to use it
 
-Orsa itself only does four things;
+Clone all of your repos into one parent directory and execute:
 
-* Act as the root element of the object model of the projects and their files
-* Manage plugins
-* Manage tasks created by plugins
-* Manage logging stuff
+```
+npx orsa scan
+```
 
-Plugins are what really [do all the work](https://github.com/orsa-actual/orsa/blob/master/docs/plugins.md). There are lots of useful plugins that come out of the box that you can use to scan your projects.
+Once that completes you can do:
+
+```
+npx orsa serve
+```
+
+To start up a GraphQL server (with a graphiql UI) that you can use to run queries against the results.
 
 ## Orsa and Javascript
 
-Orsa is written in Javascript so we have [extensive support for it](https://github.com/orsa-actual/orsa/blob/master/docs/javascript.md). That being said, Orsa's DOM, plugin and task systems are in no way Javascript specific. So if you want to build plugins to scan Java, Closure, Go, Basic, or whatever, have at it, publish them on `npm` and I'm sure we'll give you a shout out.
-
-## Want to see it in a UI?
-
-Command line is great, but what you really want is a Web UI, we have that too in [orsa-server](https://github.com/orsa-actual/orsa-server)! And even better, it's not just a web UI, it's also a [GraphQL server](http://graphql.org/). So you can write your own apps against the GraphQL endpoint.
-
-Once you have an [orsa-server](https://github.com/orsa-actual/orsa-server) running you can connect to it in Slack using the [orsabot](https://github.com/orsa-actual/orsabot).
+Orsa is written in Javascript so we have [extensive support for it](https://github.com/orsa-actual/orsa/blob/master/docs/javascript.md). We will be working to support Typescript in the near future.
 
 ## Staying in contact
 

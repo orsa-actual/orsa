@@ -1,10 +1,6 @@
 node_modules
-**/node_modules
 coverage
-**/coverage
 
 *npm-debug*
-
-.nyc_output
 
 **/fixtures/*.json
