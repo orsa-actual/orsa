@@ -1,6 +1,5 @@
 const yargs = require('yargs');
 const fs = require('fs');
-const path = require('path');
 const chalk = require('chalk');
 
 const orsa = require('./index');
@@ -37,21 +36,6 @@ module.exports = async (opts) => {
     ],
   };
 
-  if (options.fs.existsSync('.orscarc')) {
-    config = {
-      ...config,
-      ...JSON.parse(options.fs.readFileSync('orscarc')),
-    };
-  }
-  if (options.fs.existsSync('.orscarc.js')) {
-    /* eslint-disable global-require, import/no-unresolved */
-    config = {
-      ...config,
-      ...require('.orscarc.js'),
-    };
-    /* eslint-enable global-require, import/no-unresolved */
-  }
-
   const context = {
     basePath: options.process.cwd(),
     logger: {
@@ -66,6 +50,16 @@ module.exports = async (opts) => {
       }
     }
   };
+
+  if (options.fs.existsSync('.orsarc.js')) {
+    context.logger.log('Orsa', 'Parsing orsarc');
+    /* eslint-disable global-require, import/no-unresolved */
+    config = {
+      ...config,
+      ...require(`${process.cwd()}/.orsarc`)(orsa),
+    };
+    /* eslint-enable global-require, import/no-unresolved */
+  }
 
   options.yargs
     .command('serve', 'start the server', () => {}, async (argv) => {

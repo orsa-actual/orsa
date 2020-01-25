@@ -6,6 +6,8 @@ const docGen = require('react-docgen');
 const babylon = require('babylon');
 const traverse = require('babel-traverse').default;
 
+const { runRules } = require('../rules');
+
 const {
   runner,
   allMatchers,
@@ -74,9 +76,9 @@ const astParser = (fileName, options = {
   };
 };
 
-module.exports = async (
-  { javascriptPatterns, javascriptIgnore, javascriptMatchers }, { store, logger }, opts,
-) => {
+module.exports = async (config, context, opts) => {
+  const { javascriptPatterns, javascriptIgnore, javascriptMatchers } = config;
+  const { store, logger } = context;
   const options = {
     glob,
     runner,
@@ -124,7 +126,6 @@ module.exports = async (
           }
         // eslint-disable-next-line no-empty
         } catch (docgenError) {
-
         }
 
         const file = {
@@ -166,6 +167,12 @@ module.exports = async (
         /* eslint-enable no-param-reassign */
 
         file.features = found.features;
+
+        runRules(config, context, 'File', {
+          ...file,
+          ast,
+          project,
+        });
 
         store.update(file);
       });

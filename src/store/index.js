@@ -100,12 +100,25 @@ type DependencySearchResult {
   versions: [DependencySearchResult_Version!]
 }
 
+type RunWarning {
+  project: Project
+  file: File
+  severity: String!
+  message: String!
+}
+
+type RunInfo {
+  start: String
+  warnings: [RunWarning!]
+}
+
 type Query {
   projects: [Project!]
   files: [File!]
   projectSearch(name: String): [Project!]
   featureSearch(type: String!, from: String, name: String): [Feature!]
   dependencySearch(name: String): [DependencySearchResult!]
+  runInfo: RunInfo!
 }
 `;
 
@@ -113,10 +126,18 @@ module.exports = {
   createStore: () => {
     const nodes = {};
     const indexes = {};
+    let runInfo = {
+      start: (new Date()).toString(),
+      warnings: [],
+    };
 
     const schema = buildSchema(SCHEMA);
 
     const resolvers = {
+      RunWarning: {
+        project: ({ projectId }) => nodes[projectId],
+        file: ({ fileId }) => nodes[fileId],
+      },
       Project: {
         files: ({ id }) => Object.values(nodes).filter(({ nodeType, parentId }) => nodeType === 'File' && parentId === id),
       },
@@ -133,6 +154,7 @@ module.exports = {
         file: ({ parentId }) => nodes[parentId],
       },
       Query: {
+        runInfo: () => runInfo,
         files: () => Object.values(nodes).filter(({ nodeType }) => nodeType === 'File'),
         projects: () => Object.values(nodes).filter(({ nodeType }) => nodeType === 'Project'),
         projectSearch: (obj, args) => {
@@ -186,6 +208,9 @@ module.exports = {
       getById: (id) => nodes[id],
       query: async (gql) => graphql(schema, gql, root),
       updateIndex: (name, index) => { indexes[name] = index; },
+      addWarning: (warning) => {
+        runInfo.warnings.push(warning);
+      },
       load: async ({ basePath, storeDirectory = '.orsa-data' }) => {
         glob
           .sync(path.join(basePath, storeDirectory, 'data/*.json'))
@@ -197,6 +222,9 @@ module.exports = {
           .forEach((p) => {
             indexes[path.basename(p, '.json')] = JSON.parse(fs.readFileSync(p).toString());
           });
+        runInfo = JSON.parse(fs.readFileSync(
+          path.join(basePath, storeDirectory, 'runInfo.json'),
+        ).toString());
         return {
           typeDefs: SCHEMA,
           resolvers,
@@ -228,6 +256,11 @@ module.exports = {
               JSON.stringify(indexes[k], null, 2),
             );
           });
+
+        fs.writeFileSync(
+          path.join(basePath, storeDirectory, `runInfo.json`),
+          JSON.stringify(runInfo, null, 2),
+        );
       },
     };
   },

@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
+const { fileRule, projectRule } = require('./rules');
 
 const {
   createStore,
@@ -12,6 +13,8 @@ const runPlugins = async (plugins, config, context) => {
 };
 
 const core = {
+  fileRule,
+  projectRule,
   scan: async (config, context = {}) => {
     // eslint-disable-next-line no-param-reassign
     context.store = createStore();
