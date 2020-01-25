@@ -83,23 +83,45 @@ type Project {
   dependencies: [Dependency!]
 }
 
+type DependencySearchResult_Project {
+  project: Project!
+  type: String!
+}
+
+type DependencySearchResult_Version {
+  name: String!
+  version: String!
+  projects: [DependencySearchResult_Project!]
+}
+
+type DependencySearchResult {
+  name: String!
+  requestedVersions: [DependencySearchResult_Version!]
+  versions: [DependencySearchResult_Version!]
+}
+
 type Query {
   projects: [Project!]
   files: [File!]
   projectSearch(name: String): [Project!]
   featureSearch(type: String!, from: String, name: String): [Feature!]
+  dependencySearch(name: String): [DependencySearchResult!]
 }
 `;
 
 module.exports = {
   createStore: () => {
     const nodes = {};
+    const indexes = {};
 
     const schema = buildSchema(SCHEMA);
 
     const resolvers = {
       Project: {
         files: ({ id }) => Object.values(nodes).filter(({ nodeType, parentId }) => nodeType === 'File' && parentId === id),
+      },
+      DependencySearchResult_Project: {
+        project: ({ project }) => nodes[project],
       },
       File: {
         project: ({ parentId }) => nodes[parentId],
@@ -118,6 +140,14 @@ module.exports = {
           return Object.values(nodes).filter(
             ({ nodeType, name }) => nodeType === 'Project' && name.toLowerCase().indexOf(searchName) > -1,
           );
+        },
+        dependencySearch: (obj, args) => {
+          const searchName = args.name.toLowerCase();
+          const index = indexes['js-package-index'];
+          return Object
+            .keys(index)
+            .filter((key) => key.toLowerCase().indexOf(searchName) > -1)
+            .map((key) => index[key]);
         },
         featureSearch: (obj, args) => {
           const features = [];
@@ -155,11 +185,17 @@ module.exports = {
       },
       getById: (id) => nodes[id],
       query: async (gql) => graphql(schema, gql, root),
+      updateIndex: (name, index) => { indexes[name] = index; },
       load: async ({ basePath, storeDirectory = '.orsa-data' }) => {
         glob
-          .sync(path.join(basePath, storeDirectory, '*.json'))
+          .sync(path.join(basePath, storeDirectory, 'data/*.json'))
           .forEach((p) => {
             nodes[path.basename(p, '.json')] = JSON.parse(fs.readFileSync(p).toString());
+          });
+        glob
+          .sync(path.join(basePath, storeDirectory, 'indexes/*.json'))
+          .forEach((p) => {
+            indexes[path.basename(p, '.json')] = JSON.parse(fs.readFileSync(p).toString());
           });
         return {
           typeDefs: SCHEMA,
@@ -168,16 +204,28 @@ module.exports = {
       },
       save: async ({ basePath, storeDirectory = '.orsa-data' }) => {
         rimraf.sync(path.join(basePath, storeDirectory));
+
         fs.mkdirSync(path.join(basePath, storeDirectory));
+        fs.mkdirSync(path.join(basePath, storeDirectory, 'data'));
         Object
           .keys(nodes)
           .forEach((k) => {
             fs.writeFileSync(
-              path.join(basePath, storeDirectory, `${k}.json`),
+              path.join(basePath, storeDirectory, `data/${k}.json`),
               JSON.stringify({
                 ...nodes[k],
                 transient: undefined,
               }, null, 2),
+            );
+          });
+
+        fs.mkdirSync(path.join(basePath, storeDirectory, 'indexes'));
+        Object
+          .keys(indexes)
+          .forEach((k) => {
+            fs.writeFileSync(
+              path.join(basePath, storeDirectory, `indexes/${k}.json`),
+              JSON.stringify(indexes[k], null, 2),
             );
           });
       },

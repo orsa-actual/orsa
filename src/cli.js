@@ -8,6 +8,7 @@ const projectFinderPlugin = require('./plugins/js-project-finder');
 const jsFileFinderPlugin = require('./plugins/js-file-finder');
 const jsDependenciesPlugin = require('./plugins/js-dependencies');
 const jsBuilderPlugin = require('./plugins/js-builder');
+const jsPackageIndexer = require('./plugins/js-package-indexer');
 
 module.exports = async (opts) => {
   const options = {
@@ -20,7 +21,7 @@ module.exports = async (opts) => {
 
   let config = {
     scanDirectories: [
-      '.'
+      '.',
     ],
     projectScanPlugins: [
       projectFinderPlugin,
@@ -32,20 +33,23 @@ module.exports = async (opts) => {
       jsDependenciesPlugin,
     ],
     plugins: [
+      jsPackageIndexer,
     ],
   };
 
   if (options.fs.existsSync('.orscarc')) {
-    config = Object.assign(
-      config,
-      JSON.parse(options.fs.readFileSync('orscarc'))
-    );
+    config = {
+      ...config,
+      ...JSON.parse(options.fs.readFileSync('orscarc')),
+    };
   }
   if (options.fs.existsSync('.orscarc.js')) {
-    config = Object.assign(
-      config,
-      require('.orscarc.js')
-    );
+    /* eslint-disable global-require, import/no-unresolved */
+    config = {
+      ...config,
+      ...require('.orscarc.js'),
+    };
+    /* eslint-enable global-require, import/no-unresolved */
   }
 
   const context = {
