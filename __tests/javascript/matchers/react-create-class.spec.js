@@ -1,7 +1,6 @@
-const expect = require('chai').expect;
-const runner = require('../../../src/runner');
 const parseJS = require('../parse-js');
-const createClassMatcher = require('../../../src/matchers/react-create-class');
+const runner = require('../../../src/javascript/runner');
+const createClassMatcher = require('../../../src/javascript/matchers/react-create-class');
 
 const createClass1 = `
 const MyComponent = React.createClass({
@@ -21,7 +20,7 @@ describe('react-create-class', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(createClass1), [
       createClassMatcher,
-    ]).features).to.eql([
+    ]).features).toEqual([
       {
         end: 8,
         start: 2,
@@ -40,6 +39,6 @@ describe('react-create-class', () => {
   it('should not find regular functions', () => {
     expect(runner(parseJS(notReactCreateClass), [
       createClassMatcher,
-    ]).features).to.eql([]);
+    ]).features).toEqual([]);
   });
 });

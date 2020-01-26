@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const runner = require('../../../src/runner');
 const parseJS = require('../parse-js');
-const jsxUsageMatcher = require('../../../src/matchers/jsx-usage');
+
+const runner = require('../../../src/javascript/runner');
+const jsxUsageMatcher = require('../../../src/javascript/matchers/jsx-usage');
 
 const usage1 = `
 import React from 'react';
@@ -25,7 +25,7 @@ describe('jsx-usage', () => {
   it('should find a component usage', () => {
     expect(runner(parseJS(usage1), [
       jsxUsageMatcher,
-    ]).features).to.eql([
+    ]).features).toEqual([
       {
         end: 7,
         start: 5,
@@ -42,7 +42,7 @@ describe('jsx-usage', () => {
   it('should find a component usage with a base', () => {
     expect(runner(parseJS(usage2), [
       jsxUsageMatcher,
-    ]).features).to.eql([
+    ]).features).toEqual([
       {
         end: 7,
         start: 5,

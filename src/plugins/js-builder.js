@@ -1,31 +1,11 @@
-const glob = require('glob');
-const fs = require('fs');
-const { exec } = require('child_process');
+const { exec } = require('child-process-promise');
 
 const DEFAULT_BUILD_COMMAND = 'npm install';
 const DEFAULT_TEST_COMMAND = 'npm test';
 
 module.exports = async (
-  { javascriptBuildCommand, javascriptTestCommand }, { store, logger }, opts,
+  { javascriptBuildCommand, javascriptTestCommand }, { store, logger },
 ) => {
-  const options = {
-    glob,
-    fs,
-    exec,
-    ...opts,
-  };
-
-  const execPromise = (cmd, execOpts) => new Promise((resolve, reject) => {
-    options.exec(cmd, execOpts,
-      (error, stdout, stderr) => {
-        if (error) {
-          reject(new Error(error));
-        } else {
-          resolve({ error, stdout, stderr });
-        }
-      });
-  });
-
   /* eslint-disable indent, comma-dangle */
   const { data: { projects } } = await store.query(
 `query {
@@ -45,7 +25,7 @@ module.exports = async (
       const {
         stdout,
         stderr,
-      } = await execPromise(
+      } = await exec(
         javascriptBuildCommand || DEFAULT_BUILD_COMMAND, { cwd: project.transient.path },
       );
       store.update({
@@ -56,7 +36,7 @@ module.exports = async (
         },
       });
     } catch (error) {
-      logger.error('Javascript builder', `Error building ${project.name}`);
+      logger.error('Javascript builder', `Error building ${project.name} - ${error.toString()}`);
       store.update({
         ...project,
         build: {
@@ -71,7 +51,7 @@ module.exports = async (
         const {
           stdout,
           stderr,
-        } = await execPromise(
+        } = await exec(
           javascriptTestCommand || DEFAULT_TEST_COMMAND, { cwd: project.transient.path },
         );
         store.update({
@@ -82,7 +62,7 @@ module.exports = async (
           },
         });
       } catch (error) {
-        logger.error('Javascript builder', `Error testing ${project.name}`);
+        logger.error('Javascript builder', `Error testing ${project.name} - ${error.toString()}`);
         store.update({
           ...project,
           test: {

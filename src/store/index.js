@@ -258,7 +258,7 @@ module.exports = {
           });
 
         fs.writeFileSync(
-          path.join(basePath, storeDirectory, `runInfo.json`),
+          path.join(basePath, storeDirectory, 'runInfo.json'),
           JSON.stringify(runInfo, null, 2),
         );
       },

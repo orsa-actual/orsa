@@ -3,8 +3,8 @@ module.exports = {
     (config.rules || []).forEach((f) => {
       const out = f(config, context, objectType, objectData);
       if (out) {
-        ['warning', 'error'].forEach(severity => {
-          (out[severity] || []).forEach(message => {
+        ['warning', 'error'].forEach((severity) => {
+          (out[severity] || []).forEach((message) => {
             const msg = {
               severity,
               message,
@@ -21,8 +21,10 @@ module.exports = {
       }
     });
   },
-  fileRule: (fn) => (config, context, objectType, objectData) => 
-    (objectType === 'File') ? fn(config, context, objectData) : null,
-  projectRule: (fn) => (config, context, objectType, objectData) =>
-    (objectType === 'Project') ? fn(config, context, objectData) : null,
+  /* eslint-disable no-confusing-arrow */
+  fileRule: (fn) => (config, context, objectType, objectData) => (objectType === 'File')
+    ? fn(config, context, objectData) : null,
+  projectRule: (fn) => (config, context, objectType, objectData) => (objectType === 'Project')
+    ? fn(config, context, objectData) : null,
+  /* eslint-enable no-confusing-arrow */
 };

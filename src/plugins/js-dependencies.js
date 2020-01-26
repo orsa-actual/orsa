@@ -3,13 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 /* eslint-disable-next-line no-empty-pattern */
-module.exports = async ({}, { store, logger }, opts) => {
-  const options = {
-    glob,
-    fs,
-    ...opts,
-  };
-
+module.exports = async ({}, { store, logger }) => {
   /* eslint-disable indent */
   const { data: { projects } } = await store.query(
 `query {
@@ -42,12 +36,12 @@ module.exports = async ({}, { store, logger }, opts) => {
     });
 
     logger.log('Dependency Analysis', `Scanning node modules on ${project.name}`);
-    options.glob.sync('./node_modules/*/package.json', {
+    glob.sync('./node_modules/*/package.json', {
       cwd: project.transient.path,
     }).forEach((file) => {
       try {
         const pkg = JSON.parse(
-          options.fs.readFileSync(path.resolve(project.transient.path, file)).toString(),
+          fs.readFileSync(path.resolve(project.transient.path, file)).toString(),
         );
         if (packages[pkg.name]) {
           packages[pkg.name].version = pkg.version;

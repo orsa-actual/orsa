@@ -1,8 +1,7 @@
-const expect = require('chai').expect;
-const runner = require('../../../src/runner');
 const parseJS = require('../parse-js');
-const classMatcher = require('../../../src/matchers/class');
-const visit = require('../../../src/visit');
+const runner = require('../../../src/javascript/runner');
+const classMatcher = require('../../../src/javascript/matchers/class');
+const visit = require('../../../src/javascript/visit');
 
 const reactExample1 = `class MyComponent extends React.Component {
   render() {
@@ -42,7 +41,7 @@ describe('class matcher', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(reactExample1), [
       classMatcher,
-    ]).features).to.eql([
+    ]).features).toEqual([
       {
         end: 7,
         start: 1,
@@ -78,7 +77,7 @@ describe('class matcher', () => {
     const found = runner(parseJS(reactExample2), [
       classMatcher,
     ]).features;
-    expect(found).to.eql([
+    expect(found).toEqual([
       {
         end: 15,
         start: 1,
@@ -136,7 +135,7 @@ describe('class matcher', () => {
         type: node.type,
       });
     });
-    expect(foundNodes).to.eql([
+    expect(foundNodes).toEqual([
       {
         start: 1,
         end: 15,
@@ -163,7 +162,7 @@ describe('class matcher', () => {
   it('should find a non-react class', () => {
     expect(runner(parseJS(nonReactClass), [
       classMatcher,
-    ]).features).to.eql([
+    ]).features).toEqual([
       {
         end: 6,
         start: 2,

@@ -1,7 +1,6 @@
-const expect = require('chai').expect;
-const runner = require('../../../src/runner');
 const parseJS = require('../parse-js');
-const statelessMatcher = require('../../../src/matchers/react-stateless');
+const runner = require('../../../src/javascript/runner');
+const statelessMatcher = require('../../../src/javascript/matchers/react-stateless');
 
 const stateless1 = `
 const MyComponent = () => (
@@ -15,7 +14,7 @@ describe('react-stateless', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(stateless1), [
       statelessMatcher,
-    ]).features).to.eql([
+    ]).features).toEqual([
       {
         end: 5,
         start: 2,
@@ -38,6 +37,6 @@ describe('react-stateless', () => {
   it('should not find regular functions', () => {
     expect(runner(parseJS(nonStateless1), [
       statelessMatcher,
-    ]).features).to.eql([]);
+    ]).features).toEqual([]);
   });
 });

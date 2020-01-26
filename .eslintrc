@@ -3,5 +3,12 @@
   "rules": {
     "no-restricted-syntax": 0,
     "no-await-in-loop": 0
+  },
+  "globals": {
+    "expect": true,
+    "describe": true,
+    "it": true,
+    "jest": true,
+    "beforeEach": true
   }
 }
