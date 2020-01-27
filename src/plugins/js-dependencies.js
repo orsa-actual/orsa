@@ -14,9 +14,9 @@ module.exports = async ({}, { store, logger }) => {
   );
   /* eslint-enable indent */
 
+  logger.log('Dependency indexer', 'Dependency Analysis starting');
   for (const { id } of projects) {
     const project = store.getById(id);
-    logger.log('Dependency Analysis', `${project.name}`);
 
     const packages = {};
 
@@ -35,7 +35,6 @@ module.exports = async ({}, { store, logger }) => {
       packages[name] = { name, requestedVersion: peerDependencies[name], type: 'peer' };
     });
 
-    logger.log('Dependency Analysis', `Scanning node modules on ${project.name}`);
     glob.sync('./node_modules/*/package.json', {
       cwd: project.transient.path,
     }).forEach((file) => {
@@ -62,4 +61,5 @@ module.exports = async ({}, { store, logger }) => {
       dependencies: Object.values(packages),
     });
   }
+  logger.log('Dependency indexer', 'Dependency Analysis complete');
 };

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Javascript dependencies should find lerna projects 1`] = `
+Object {
+  "311128a3ab878d27e98b4f68914aa64e": Object {
+    "id": "311128a3ab878d27e98b4f68914aa64e",
+    "name": undefined,
+    "nodeType": "Project",
+    "packageJSON": "{}",
+    "projectType": "node",
+    "transient": Object {
+      "packageJSON": Object {},
+      "path": "/bar/zap",
+    },
+    "version": undefined,
+  },
+}
+`;
