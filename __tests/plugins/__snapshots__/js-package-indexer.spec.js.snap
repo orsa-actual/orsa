@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Javascript Package Indexer should index 1`] = `
+Object {
+  "foo": Object {
+    "name": "foo",
+    "requestedVersions": Array [
+      Object {
+        "name": "foo",
+        "projects": Array [
+          Object {
+            "project": undefined,
+            "type": "direct",
+            "version": undefined,
+          },
+        ],
+        "version": "^1.0.0",
+      },
+    ],
+    "versions": Array [
+      Object {
+        "name": "foo",
+        "projects": Array [
+          Object {
+            "project": undefined,
+            "type": "direct",
+            "version": undefined,
+          },
+        ],
+        "version": "1.0.5",
+      },
+    ],
+  },
+}
+`;

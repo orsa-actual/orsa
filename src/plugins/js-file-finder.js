@@ -29,15 +29,9 @@ const snipppetExtractor = (lines, start, end) => ((lines && start < lines.length
   ? lines.slice(start - 1, end).join("\n") : '');
 /* eslint-enable quotes */
 
-module.exports = async (config, context, opts) => {
+module.exports = async (config, context) => {
   const { javascriptPatterns, javascriptIgnore, javascriptMatchers } = config;
   const { store, logger } = context;
-  const options = {
-    glob,
-    runner,
-    fs,
-    ...opts,
-  };
 
   const matchers = javascriptMatchers || allMatchers;
 
@@ -56,7 +50,7 @@ module.exports = async (config, context, opts) => {
     const project = store.getById(id);
 
     (javascriptPatterns || LOCATIONS).forEach((location) => {
-      const files = options.glob.sync(location, {
+      const files = glob.sync(location, {
         cwd: project.transient.path,
         ignore: (javascriptIgnore || IGNORE),
       });
@@ -65,7 +59,7 @@ module.exports = async (config, context, opts) => {
         logger.log('Javascript scanner', `Processing ${project.name} : ${name} `);
 
         const localPath = path.join(project.transient.path, name);
-        const { ast, lines } = astParser(localPath, options);
+        const { ast, lines } = astParser(localPath);
 
         const docgenOutput = [];
         try {
@@ -91,7 +85,7 @@ module.exports = async (config, context, opts) => {
           jsdoc: docgenOutput,
         };
 
-        const found = options.runner(
+        const found = runner(
           ast,
           matchers,
         );

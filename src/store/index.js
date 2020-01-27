@@ -8,7 +8,6 @@ const rimraf = require('rimraf');
 // eslint-disable-next-line operator-linebreak
 const SCHEMA =
 `type Method {
-  feature: Feature!
   start: Int!
   end: Int!
   type: String!
@@ -146,9 +145,6 @@ module.exports = {
       },
       File: {
         project: ({ parentId }) => nodes[parentId],
-      },
-      Method: {
-        feature: ({ parentId }) => nodes[parentId],
       },
       Feature: {
         file: ({ parentId }) => nodes[parentId],

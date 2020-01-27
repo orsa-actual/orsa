@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Javascript Package Indexer should index 1`] = `
+Object {
+  "features": Array [
+    Object {
+      "end": 1,
+      "from": "react",
+      "id": "3d2c95a8dc27af0bc7326d0e161156b0",
+      "keys": Array [
+        "React",
+      ],
+      "parentId": "8936d8c0447672f0ac71feaaaff306f8",
+      "snippet": "import React from 'react';",
+      "start": 1,
+      "type": "import",
+    },
+    Object {
+      "end": 10,
+      "id": "03de8ec7c7e5751e0c0007d513667394",
+      "jsDoc": Object {
+        "description": "HaveSomeClass",
+        "tags": Array [
+          Object {
+            "description": "A class",
+            "title": "description",
+          },
+        ],
+      },
+      "metadata": Object {},
+      "methods": Array [
+        Object {
+          "end": 9,
+          "id": "ce0969a2d00abafcd94cb233ad54024e",
+          "jsDoc": Object {
+            "description": "",
+            "tags": Array [],
+          },
+          "kind": "method",
+          "name": "foobar",
+          "params": Array [],
+          "parentId": "03de8ec7c7e5751e0c0007d513667394",
+          "snippet": "  foobar() {
+  }",
+          "start": 8,
+          "type": "method",
+        },
+      ],
+      "name": "HaveSomeClass",
+      "parentId": "8936d8c0447672f0ac71feaaaff306f8",
+      "snippet": "class HaveSomeClass {
+  foobar() {
+  }
+}",
+      "start": 7,
+      "superClass": undefined,
+      "type": "class",
+    },
+    Object {
+      "end": 16,
+      "id": "36e0b0f0b99ab38d9f1748a7923782a7",
+      "jsDoc": Object {
+        "description": "",
+        "tags": Array [],
+      },
+      "metadata": Object {
+        "react": true,
+        "stateless": true,
+      },
+      "methods": Array [],
+      "name": "App",
+      "parentId": "8936d8c0447672f0ac71feaaaff306f8",
+      "snippet": "const App = () => (<div>Hello</div>);",
+      "start": 16,
+      "superClass": null,
+      "type": "class",
+    },
+    Object {
+      "attributes": Array [],
+      "base": "div",
+      "end": 16,
+      "id": "3d4d669d2bbd44aa9cada84ef5596d22",
+      "name": "div",
+      "parentId": "8936d8c0447672f0ac71feaaaff306f8",
+      "snippet": "const App = () => (<div>Hello</div>);",
+      "start": 16,
+      "type": "jsx-usage",
+    },
+    Object {
+      "end": 16,
+      "id": "d377cfab7fe553f42333080ab8608951",
+      "parentId": "8936d8c0447672f0ac71feaaaff306f8",
+      "snippet": "const App = () => (<div>Hello</div>);",
+      "start": 16,
+      "text": "Hello",
+      "type": "jsx-text",
+    },
+  ],
+  "id": "8936d8c0447672f0ac71feaaaff306f8",
+  "jsdoc": Array [],
+  "mimeType": "text/javascript",
+  "name": "hello",
+  "nodeType": "File",
+  "parentId": "1",
+  "relativePath": "hello",
+}
+`;

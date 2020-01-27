@@ -15,6 +15,10 @@ describe('Main', () => {
   });
  
   it('should scan', async () => {
+    store.createStore.mockImplementation(() => ({
+      load: () => ({}),
+      save: () => {},
+    }));
     index.scan({}, {
       logger: {
         log: () => {},
