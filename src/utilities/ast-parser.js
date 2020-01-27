@@ -42,5 +42,6 @@ module.exports = (fileName) => {
     error,
     lines,
     ast,
+    fileText,
   };
 };

@@ -59,11 +59,12 @@ module.exports = async (config, context) => {
         logger.log('Javascript scanner', `Processing ${project.name} : ${name} `);
 
         const localPath = path.join(project.transient.path, name);
-        const { ast, lines } = astParser(localPath);
+        const { ast, lines, fileText } = astParser(localPath);
 
         const docgenOutput = [];
         try {
-          const output = docGen.parse(fs.readFileSync(localPath).toString());
+          ast.__src = fileText;
+          const output = docGen.parse(path.join(project.transient.path, name));
           if (output && output.props) {
             Object.keys(output.props).forEach((propName) => {
               docgenOutput.push(Object.assign(output.props[propName], {
