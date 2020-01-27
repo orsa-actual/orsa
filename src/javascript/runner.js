@@ -1,4 +1,4 @@
-const traverse = require('babel-traverse').default;
+const traverse = require('@babel/traverse').default;
 
 module.exports = (ast, matchers = []) => {
   const features = [];

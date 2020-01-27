@@ -1,4 +1,4 @@
-const types = require('babel-types');
+const types = require('@babel/types');
 
 const JSXText = require('../../types/jsx-text');
 

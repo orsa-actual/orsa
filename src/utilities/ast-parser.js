@@ -1,6 +1,6 @@
 const fs = require('fs');
-const babylon = require('babylon');
-const traverse = require('babel-traverse').default;
+const parser = require('@babel/parser');
+const traverse = require('@babel/traverse').default;
 
 module.exports = (fileName) => {
   if (!fileName) {
@@ -11,7 +11,7 @@ module.exports = (fileName) => {
   const lines = fileText.split(/[\n|\r\n]/);
   let ast = null;
   try {
-    ast = babylon.parse(fileText, {
+    ast = parser.parse(fileText, {
       sourceType: 'module',
       plugins: [
         'jsx',
@@ -21,7 +21,6 @@ module.exports = (fileName) => {
         'doExpressions',
         'trailingFunctionCommas',
         'objectRestSpread',
-        'decorators',
         'classProperties',
         'exportExtensions',
         'exponentiationOperator',
@@ -33,7 +32,7 @@ module.exports = (fileName) => {
 
     /*
     Traverse provides a semantic check on top of the basic syntax check
-    of babylon. So appy that here just to make sure we can later.
+    of parser. So appy that here just to make sure we can later.
     */
     traverse(ast);
   } catch (e) {

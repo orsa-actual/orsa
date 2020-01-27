@@ -1,4 +1,4 @@
-const types = require('babel-types');
+const types = require('@babel/types');
 const get = require('lodash.get');
 
 const ReactClass = require('../../types/react-class');

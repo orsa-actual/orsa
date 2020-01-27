@@ -8,10 +8,12 @@ jest.mock('../src/index');
 describe('Main', () => {
   beforeEach(() => {
     console.log = jest.fn();
+    console.error = jest.fn();
   });
   
   afterEach(() => {
     console.log.mockClear();
+    console.error.mockClear();
   });
 
   it('should scan', async () => {
