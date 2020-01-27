@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint src/**/*.js __tests/**/*.js",
-    "test:unit": "jest --coverage"
+    "test:unit": "jest --coverage --collectCoverage=true"
   },
   "bin": {
     "orsa": "./bin/orsa.js"
