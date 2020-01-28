@@ -9,25 +9,27 @@ module.exports = (fileName) => {
   const fileText = fs.readFileSync(fileName).toString();
   let error = null;
   const lines = fileText.split(/[\n|\r\n]/);
+  const plugins = [
+    'jsx',
+    [fileName.indexOf('.ts') > -1 ? 'typescript' : 'flow'],
+    'asyncFunctions',
+    'classConstructorCall',
+    'doExpressions',
+    'trailingFunctionCommas',
+    'objectRestSpread',
+    'classProperties',
+    'exportExtensions',
+    'exponentiationOperator',
+    'asyncGenerators',
+    'functionBind',
+    'functionSent',
+  ];
+
   let ast = null;
   try {
     ast = parser.parse(fileText, {
       sourceType: 'module',
-      plugins: [
-        'jsx',
-        'flow',
-        'asyncFunctions',
-        'classConstructorCall',
-        'doExpressions',
-        'trailingFunctionCommas',
-        'objectRestSpread',
-        'classProperties',
-        'exportExtensions',
-        'exponentiationOperator',
-        'asyncGenerators',
-        'functionBind',
-        'functionSent',
-      ],
+      plugins,
     });
 
     /*

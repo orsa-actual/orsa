@@ -3,7 +3,7 @@ const astParser = require('../../src/utilities/ast-parser');
 
 jest.mock('fs');
 
-module.exports = (js) => {
+module.exports = (js, name = 'foo.js') => {
   fs.readFileSync.mockImplementation(() => js);
-  return astParser('foo').ast;
+  return astParser(name).ast;
 };

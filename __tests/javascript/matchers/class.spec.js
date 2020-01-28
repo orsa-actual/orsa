@@ -12,6 +12,15 @@ const reactExample1 = `class MyComponent extends React.Component {
 }
 `;
 
+const reactExample1TS = `class MyComponent extends React.Component {
+  render() {
+    return (
+      <div />
+    );
+  }
+}
+`;
+
 const reactExample2 = `class MyComponent extends React.Component {
   constructor() {
     super();
@@ -40,6 +49,41 @@ class Foo {
 describe('class matcher', () => {
   it('should find MyComponent', () => {
     expect(runner(parseJS(reactExample1), [
+      classMatcher,
+    ]).features).toEqual([
+      {
+        end: 7,
+        start: 1,
+        type: 'class',
+        metadata: {
+          react: true,
+        },
+        jsDoc: {
+          description: '',
+          tags: [],
+        },
+        methods: [
+          {
+            end: 6,
+            jsDoc: {
+              description: '',
+              tags: [],
+            },
+            kind: 'method',
+            name: 'render',
+            params: [],
+            start: 2,
+            type: 'method',
+          },
+        ],
+        name: 'MyComponent',
+        superClass: 'Component',
+      },
+    ]);
+  });
+
+  it('should find MyComponent typescript', () => {
+    expect(runner(parseJS(reactExample1TS, 'foo.ts'), [
       classMatcher,
     ]).features).toEqual([
       {
