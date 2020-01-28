@@ -16,12 +16,18 @@ const {
 const LOCATIONS = [
   'src/**/*.js',
   'src/**/*.jsx',
-  'index.js',
+  'lib/**/*.js',
+  'lib/**/*.jsx',
+  '*.js',
+  '*.jsx',
 ];
 const TS_LOCATIONS = [
   'src/**/*.ts',
   'src/**/*.tsx',
-  'index.ts',
+  'lib/**/*.ts',
+  'lib/**/*.tsx',
+  '*.ts',
+  '*.tsx',
 ];
 const IGNORE = [
   '**/*.test.js',
