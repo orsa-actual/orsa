@@ -42,11 +42,89 @@ describe('Javascript dependencies', () => {
     });
   });
 
-  it('should find lerna projects', async () => {
+  it('should find bolt projects', async () => {
     glob.sync.mockReturnValue(['zap']);
     fs.readdirSync.mockReturnValue(['bar']);
     fs.existsSync.mockReturnValue(true);
     fs.readFileSync.mockReturnValue(JSON.stringify({}));
+    const objs = {};
+    await jsProjectFinder({
+      scanDirectories: [
+        '.',
+      ],
+    }, {
+      basePath: '/',
+      store: {
+        update: (inputObj) => {
+          objs[inputObj.id] = inputObj;
+        },
+      },
+      logger: {
+        log: () => {},
+        error: () => {},
+      },
+    });
+    expect(objs).toMatchSnapshot();
+  });
+
+  it('should find rush projects', async () => {
+    glob.sync.mockReturnValue(['zap']);
+    fs.readdirSync.mockReturnValue(['bar']);
+    fs.existsSync.mockImplementation((file) => {
+      const fMap = {
+        '/bar/package.json': true,
+        '/bar/rush.json': true,
+      };
+      return fMap[file] !== undefined ? fMap[file] : false;
+    });
+    fs.readFileSync.mockImplementation((file) => {
+      if (file === '/bar/rush.json') {
+        return JSON.stringify({
+          projects: [
+            {
+              projectFolder: 'baz',
+            },
+          ],
+        });
+      }
+      return JSON.stringify({});
+    });
+    const objs = {};
+    await jsProjectFinder({
+      scanDirectories: [
+        '.',
+      ],
+    }, {
+      basePath: '/',
+      store: {
+        update: (inputObj) => {
+          objs[inputObj.id] = inputObj;
+        },
+      },
+      logger: {
+        log: () => {},
+        error: () => {},
+      },
+    });
+    expect(objs).toMatchSnapshot();
+  });
+
+  it('should find bolt projects', async () => {
+    glob.sync.mockReturnValue(['zap']);
+    fs.readdirSync.mockReturnValue(['bar']);
+    fs.existsSync.mockReturnValue(true);
+    fs.readFileSync.mockImplementation((file) => {
+      if (file === '/bar/package.json') {
+        return JSON.stringify({
+          bolt: {
+            workspaces: [
+              'packages/*',
+            ],
+          },
+        });
+      }
+      return JSON.stringify({});
+    });
     const objs = {};
     await jsProjectFinder({
       scanDirectories: [

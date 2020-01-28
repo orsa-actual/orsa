@@ -39,8 +39,8 @@ module.exports = (node, path) => {
     matched.superClass = get(node, 'superClass.property.name');
     matched.jsDoc = parseJSDoc(
       get(node, 'leadingComments[0].value',
-        get(path, 'scope.parentBlock.leadingComments[0].value', '')
-      )
+        get(path, 'scope.parentBlock.leadingComments[0].value', ''),
+      ),
     );
 
     get(node, 'body.body', []).forEach((element) => {
@@ -49,14 +49,14 @@ module.exports = (node, path) => {
           element.loc.start.line,
           element.loc.end.line,
           get(element, 'key.name'),
-          get(element, 'kind')
+          get(element, 'kind'),
         );
         method.jsDoc = parseJSDoc(get(element, 'leadingComments[0].value', ''));
         get(element, 'params', []).forEach((p) => {
           const param = new Parameter(
             p.loc.start.line,
             p.loc.end.line,
-            p.name
+            p.name,
           );
           method.params.push(param);
         });

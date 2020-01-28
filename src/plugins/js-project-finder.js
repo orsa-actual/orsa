@@ -28,25 +28,51 @@ const findPackageJSON = (absPath, config, context) => {
 
       store.update(project);
 
+      if (packageJSON.bolt) {
+        logger.log('Project Finder', `Found bolt in ${subPath}`);
+        /* eslint-disable no-use-before-define */
+        findWorkspaces(absPath, config, context, packageJSON.bolt.workspaces || []);
+        /* eslint-enable no-use-before-define */
+      }
+
       runRules(config, context, 'Project', project);
     }
   }
 };
 
-const findLerna = (absPath, config, context) => {
+const findWorkspaces = (absPath, config, context, workSpaces) => {
+  workSpaces.forEach((pattern) => {
+    glob
+      .sync(pattern, { cwd: absPath })
+      .forEach((dir) => {
+        const newPath = path.join(absPath, dir);
+        findPackageJSON(newPath, config, context);
+      });
+  });
+};
+
+const findMonorepo = (absPath, config, context) => {
   const { logger, subPath } = context;
+
+  // Check for lerna
   const lernaLocation = path.join(absPath, 'lerna.json');
   if (fs.existsSync(lernaLocation)) {
     const lernaJSON = JSON.parse(fs.readFileSync(lernaLocation).toString());
     if (lernaJSON) {
       logger.log('Project Finder', `Found lerna in ${subPath}`);
-      (lernaJSON.packages || ['packages/*']).forEach((pattern) => {
-        glob
-          .sync(pattern, { cwd: absPath })
-          .forEach((dir) => {
-            const newPath = path.join(absPath, dir);
-            findPackageJSON(newPath, config, context);
-          });
+      findWorkspaces(absPath, config, context, (lernaJSON.packages || ['packages/*']));
+    }
+  }
+
+  // Check for rush
+  const rushLocation = path.join(absPath, 'rush.json');
+  if (fs.existsSync(rushLocation)) {
+    const rushJSON = JSON.parse(fs.readFileSync(rushLocation).toString());
+    if (rushJSON) {
+      logger.log('Project Finder', `Found rush in ${subPath}`);
+      (rushJSON.projects || []).forEach(({ projectFolder }) => {
+        const newPath = path.join(absPath, projectFolder);
+        findPackageJSON(newPath, config, context);
       });
     }
   }
@@ -58,7 +84,7 @@ module.exports = (config, context) => {
   for (const dir of scanDirectories) {
     for (const subPath of fs.readdirSync(path.join(basePath, dir))) {
       findPackageJSON(path.join(basePath, dir, subPath), config, { ...context, subPath });
-      findLerna(path.join(basePath, dir, subPath), config, { ...context, subPath });
+      findMonorepo(path.join(basePath, dir, subPath), config, { ...context, subPath });
     }
   }
 };
